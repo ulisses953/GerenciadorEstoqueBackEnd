@@ -1,8 +1,8 @@
 package com.gerenciador_estoque.gerenciador_estoque.controller;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 
-@Service
+@Controller
 public class ControllerProduto {
     
 }

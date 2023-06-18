@@ -4,35 +4,104 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+//import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.gerenciador_estoque.gerenciador_estoque.model.Produto;
 
 @Repository
 public class RepositoryProduto {
+
     private ArrayList<Produto> produtos = new ArrayList<Produto>();
     private int id = 0;
 
-    public void addProduto(Produto produto){
-        produto.setId(id++);
-        produtos.add(produto);
-    }
-
-    public Produto localizarId(int id){
-       for (Produto produto : produtos) {
-        if(produto.getId() == id){
-            return produto;
+    /**
+     * adiciona produto a lista
+     * @param produto produto a ser adicionado
+     */
+    public boolean adicionar(Produto produto) {
+        try {
+            return adicionar(produto, id++);
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            return false;
         }
-       }
-       return null;
+    }
+    /**
+     * adicona um produto a lista mudando com o id informado
+     * @param produto
+     * @param id
+     * @return
+     */
+    public boolean adicionar(Produto produto, int id){
+        try {
+            produto.setId(id);
+            return produtos.add(produto);
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            return false;
+        }
     }
 
-    public void DeletarProduto(int id){
-        produtos.removeIf(produto -> produto.getId() == id);
+    /**
+     * Localiza o produto com base do id
+     * @param id id do produto
+     * @return
+     */
+
+    public Produto localizarId(int id) {
+        try {
+            for (Produto produto : produtos) {
+            if (produto.getId() == id) {
+                return produto;
+            }
+        }
+        return null;
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            return null;
+        }
+        
+        
     }
 
-    public void update(Integer id, Produto produto){
-        DeletarProduto(id);
-        produto.setId(id);
-        addProduto(produto);
+    /**
+     * deleta o produto no estoque
+     * @param id id do produto
+     * @return
+     */
+
+    public boolean Deletar(int id) {
+        try {
+            return produtos.removeIf(produto -> produto.getId() == id);
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            return false;
+        }
+
+    }
+    /**
+     * Da um update em um produto
+     * @param id id do produto a ser trocado
+     * @param produto
+     * @return
+     */
+    public boolean update( Produto produto,Integer id) {
+        try {
+           
+            if (null == localizarId(id)) {
+                throw new Exception("Nao existe um produto com o id informado");
+            }
+
+            if (false == Deletar(id)) {
+                throw new Exception("Erro ao deletar o produto");
+            }
+            produto.setId(id);
+            if(false == adicionar(produto)){
+                throw new Exception("Erro em adicionar produto");
+            }  
+            return true;
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            return false;
+        }
     }
 }
