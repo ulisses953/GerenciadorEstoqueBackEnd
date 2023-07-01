@@ -16,6 +16,7 @@ public class RepositoryProduto {
     /**
      * adiciona produto a lista
      * @param produto produto a ser adicionado
+     * @author ulisses
      */
     public boolean adicionar(Produto produto) {
         try {
@@ -30,6 +31,7 @@ public class RepositoryProduto {
      * @param produto
      * @param id
      * @return
+     * @author ulisses
      */
     public boolean adicionar(Produto produto, int id){
         try {
@@ -45,6 +47,7 @@ public class RepositoryProduto {
      * Localiza o produto com base do id
      * @param id id do produto
      * @return
+     * @author ulisses
      */
 
     public Produto localizarId(int id) {
@@ -59,14 +62,13 @@ public class RepositoryProduto {
             System.err.println(e.toString());
             return null;
         }
-        
-        
     }
 
     /**
      * deleta o produto no estoque
      * @param id id do produto
      * @return
+     * @author ulisses
      */
 
     public boolean Deletar(int id) {
@@ -81,8 +83,9 @@ public class RepositoryProduto {
     /**
      * Da um update em um produto
      * @param id id do produto a ser trocado
-     * @param produto
-     * @return
+     * @param produto produto a ser trocado
+     * @return retorna um boolean
+     * @author ulisses
      */
     public boolean update( Produto produto,Integer id) {
         try {
@@ -94,10 +97,11 @@ public class RepositoryProduto {
             if (false == Deletar(id)) {
                 throw new Exception("Erro ao deletar o produto");
             }
-            produto.setId(id);
+            
             if(false == adicionar(produto)){
                 throw new Exception("Erro em adicionar produto");
             }  
+            produto.setId(id);
             return true;
         } catch (Exception e) {
             System.err.println(e.toString());
