@@ -30,7 +30,7 @@ public class RepositoryProduto {
      * adicona um produto a lista mudando com o id informado
      * @param produto
      * @param id
-     * @return
+     * @return retorna um boolean 
      * @author ulisses
      */
     public boolean adicionar(Produto produto, int id){
