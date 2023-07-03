@@ -1,6 +1,5 @@
-package com.gerenciador_estoque.service;
+package com.gerenciador_estoque.gerenciador_estoque.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -47,6 +46,10 @@ public class serviceProdutoTest {
 
         assertTrue(service.update(a2, 0));
         assertFalse(service.update(a2, 2));
+    }
 
+    @Test
+    void testObterTodos() {
+        
     }
 }

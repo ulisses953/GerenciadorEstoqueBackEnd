@@ -1,6 +1,7 @@
-package com.gerenciador_estoque.service;
+package com.gerenciador_estoque.gerenciador_estoque.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+
 
 import com.gerenciador_estoque.gerenciador_estoque.model.Produto;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryProduto;
@@ -21,7 +22,6 @@ public class serviceProduto {
         } catch (Exception e) {
             return false;
         }
-
     }
 
     /**
@@ -32,7 +32,7 @@ public class serviceProduto {
      * @author ulisses
      */
 
-    public Produto localizarId(int id) {
+    public Produto LocalizarId(int id) {
         return repositoryProduto.localizarId(id);
     }
 
@@ -56,17 +56,20 @@ public class serviceProduto {
      * @return retorna um boolean
      * @author ulisses
      */
-    public boolean update(Produto produto, Integer id) {
-        return repositoryProduto.update(produto, id);
+    public boolean Update(Produto produto, Integer id) {
+        return repositoryProduto.Update(produto, id);
     }
+    /**
+     * Obter todos os produtos
+     * @return
+     */
 
-    // #region construcor
-    public serviceProduto(RepositoryProduto repositoryProduto) {
-        this.repositoryProduto = repositoryProduto;
-    }
-
-    public serviceProduto() {
-    }
-    // #endregion
+    public ArrayList<Produto> ObterTodos(){
+        try {
+            return repositoryProduto.ObterTodos();
+        } catch (Exception e) {
+            return null;
+        }
+    } 
 
 }

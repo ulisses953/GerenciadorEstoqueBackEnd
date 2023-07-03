@@ -1,4 +1,4 @@
-package com.gerenciador_estoque.repository;
+package com.gerenciador_estoque.gerenciador_estoque.repository;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import com.gerenciador_estoque.gerenciador_estoque.model.Produto;
-import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryProduto;
 
 public class RepositoryProdutoTest {
     @Test
@@ -43,6 +42,11 @@ public class RepositoryProdutoTest {
         RepositoryProduto rep = new RepositoryProduto();
         
         rep.adicionar(new Produto(), 10);
-        assertTrue(rep.update(new Produto(1, "ps4", "ps4 de 500g", 1000.00, 1500.00, null, null), 10));
+        assertTrue(rep.Update(new Produto(1, "ps4", "ps4 de 500g", 1000.00, 1500.00, null, null), 10));
+    }
+
+    @Test
+    void testObterTodos() {
+        
     }
 }

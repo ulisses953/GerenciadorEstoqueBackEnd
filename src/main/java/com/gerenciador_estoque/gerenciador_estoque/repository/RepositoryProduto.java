@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
 
-//import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.gerenciador_estoque.gerenciador_estoque.model.Produto;
 
 @Repository
@@ -49,7 +48,6 @@ public class RepositoryProduto {
      * @return
      * @author ulisses
      */
-
     public Produto localizarId(int id) {
         try {
             for (Produto produto : produtos) {
@@ -70,7 +68,6 @@ public class RepositoryProduto {
      * @return
      * @author ulisses
      */
-
     public boolean Deletar(int id) {
         try {
             return produtos.removeIf(produto -> produto.getId() == id);
@@ -87,7 +84,7 @@ public class RepositoryProduto {
      * @return retorna um boolean
      * @author ulisses
      */
-    public boolean update( Produto produto,Integer id) {
+    public boolean Update( Produto produto,Integer id) {
         try {
            
             if (null == localizarId(id)) {
@@ -106,6 +103,19 @@ public class RepositoryProduto {
         } catch (Exception e) {
             System.err.println(e.toString());
             return false;
+        }
+    }
+    /**
+     * funcao para pegar todos os produtos 
+     * @return lista de produto
+     * @author ulisses
+     */
+
+    public ArrayList<Produto> ObterTodos(){
+        try {
+            return produtos;
+        } catch (Exception e) {
+            return null;
         }
     }
 }
