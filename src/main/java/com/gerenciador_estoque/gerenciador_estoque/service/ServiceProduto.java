@@ -2,13 +2,17 @@ package com.gerenciador_estoque.gerenciador_estoque.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.gerenciador_estoque.gerenciador_estoque.model.Produto;
-import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryProduto;
+import com.gerenciador_estoque.gerenciador_estoque.repository.OldRepositoryProduto;
 
-public class serviceProduto {
+@Service
+public class ServiceProduto implements Service<Produto>{
 
-    private RepositoryProduto repositoryProduto = new RepositoryProduto();
+    
 
     /**
      * adiciona produto a lista
@@ -17,11 +21,8 @@ public class serviceProduto {
      * @author ulisses
      */
     public boolean adicionar(Produto produto) {
-        try {
-            return repositoryProduto.adicionar(produto);
-        } catch (Exception e) {
-            return false;
-        }
+
+        return 
     }
 
     /**
@@ -32,7 +33,7 @@ public class serviceProduto {
      * @author ulisses
      */
 
-    public Produto LocalizarId(int id) {
+    public Produto localizarId(int id) {
         return repositoryProduto.localizarId(id);
     }
 
@@ -44,8 +45,8 @@ public class serviceProduto {
      * @author ulisses
      */
 
-    public boolean Deletar(int id) {
-        return repositoryProduto.Deletar(id);
+    public boolean deletar(int id) {
+        return repositoryProduto.deletar(id);
     }
 
     /**
@@ -56,20 +57,20 @@ public class serviceProduto {
      * @return retorna um boolean
      * @author ulisses
      */
-    public boolean Update(Produto produto, Integer id) {
-        return repositoryProduto.Update(produto, id);
+    public boolean update(Produto produto, Integer id) {
+        return repositoryProduto.update(produto, id);
     }
+
     /**
      * Obter todos os produtos
+     * 
      * @return
+     * @author ulisses
      */
 
-    public ArrayList<Produto> ObterTodos(){
-        try {
-            return repositoryProduto.ObterTodos();
-        } catch (Exception e) {
-            return null;
-        }
-    } 
+    public ArrayList<Produto> obterTodos() {
 
+        return repositoryProduto.obterTodos();
+
+    }
 }
