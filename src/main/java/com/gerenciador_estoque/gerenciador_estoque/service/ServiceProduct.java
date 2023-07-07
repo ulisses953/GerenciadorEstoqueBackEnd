@@ -22,6 +22,10 @@ public class ServiceProduct {
         return repositoryProduct.getAll();
     }
 
+    public Product getById(Integer id){
+        return repositoryProduct.getById(id);
+    }
+
     public boolean addProducts(ArrayList<Product> products){
         repositoryProduct.saveAll(products);
         return true;
@@ -37,4 +41,6 @@ public class ServiceProduct {
         repositoryProduct.deleteById(id);
         return true;
     }
+
+
 }

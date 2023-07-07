@@ -28,6 +28,10 @@ public class ControllerProduto {
     public ArrayList<Product> getAll(){
         return serviceProduct.getAll();
     }
+    @GetMapping("/{id}")
+    public Product getById(@PathVariable Integer id){
+        return serviceProduct.getById(id);
+    }
     
     @PostMapping()
     public boolean addProducts(@RequestBody Product products){
