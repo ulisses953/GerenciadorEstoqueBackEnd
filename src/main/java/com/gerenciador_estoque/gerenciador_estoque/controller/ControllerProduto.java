@@ -1,5 +1,11 @@
 package com.gerenciador_estoque.gerenciador_estoque.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gerenciador_estoque.gerenciador_estoque.model.Product;
+import com.gerenciador_estoque.gerenciador_estoque.service.ServiceProduct;
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,76 +15,38 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.gerenciador_estoque.gerenciador_estoque.model.Produto;
-import com.gerenciador_estoque.gerenciador_estoque.service.ServiceProduto;
 
 @RestController
-@RequestMapping("/api/produtos")
+@RequestMapping("/api/product")
 public class ControllerProduto {
+    
     @Autowired
-    private ServiceProduto serviceProduto;
-
-    /**
-     * 
-     * @return
-     */
+    private ServiceProduct serviceProduct; 
+    
     @GetMapping
-    public ArrayList<Produto> ObterTodos() {
-        return serviceProduto.obterTodos();
+    public ArrayList<Product> getAll(){
+        return serviceProduct.getAll();
+    }
+    
+    @PostMapping()
+    public boolean addProducts(@RequestBody Product products){
+        return serviceProduct.addProduct(products);
     }
 
-    /**
-     * 
-     * @param produto
-     * @return
-     */
-
-    @PostMapping
-    public boolean adicionar(@RequestBody Produto produto) {
-        return serviceProduto.adicionar(produto);
+    @PostMapping("/many")
+    public boolean addProducts(@RequestBody ArrayList<Product> products){
+        return serviceProduct.addProducts(products);
     }
-
-    /**
-     * 
-     * @param id
-     * @return
-     */
-
-    @GetMapping("/{id}")
-    public Produto localizarId(@PathVariable int id) {
-        return serviceProduto.localizarId(id);
-    }
-
-    /**
-     * 
-     * @param id
-     * @return
-     */
 
     @DeleteMapping("/{id}")
-    public boolean deletar(@PathVariable int id) {
-        return serviceProduto.deletar(id);
+    public boolean delete(@PathVariable int id){
+        return serviceProduct.delete(id);
     }
 
-    /**
-     * 
-     * @param produto
-     * @param id
-     * @return
-     */
-
-    @PutMapping("{id}")
-    public boolean update(@RequestBody Produto produto, @PathVariable int id) {
-        return serviceProduto.update(produto, id);
+    @PutMapping("/{id}")
+    public boolean update(@PathVariable int id,@RequestBody Product product){
+        return serviceProduct.update(id,product);
     }
-
-    public ControllerProduto(ServiceProduto serviceProduto) {
-        this.serviceProduto = serviceProduto;
-    }
-
-    
-    
+   
 }
