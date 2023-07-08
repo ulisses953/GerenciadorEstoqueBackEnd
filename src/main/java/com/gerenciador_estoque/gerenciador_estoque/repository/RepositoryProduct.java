@@ -13,15 +13,6 @@ import com.gerenciador_estoque.gerenciador_estoque.model.Product;
 public interface RepositoryProduct extends JpaRepository<Product, Integer> {
 
     /**
-     * function that returns all products
-     * 
-     * @return product list
-     * @author ulisses953
-     */
-    @Query(value = "SELECT * FROM Product", nativeQuery = true)
-    public ArrayList<Product> getAll();
-
-    /**
      * function that aims to locate a product by id
      * 
      * @param id product id to find
@@ -31,5 +22,5 @@ public interface RepositoryProduct extends JpaRepository<Product, Integer> {
     @Query(value = "SELECT * FROM Product where id = :id", nativeQuery = true)
     public Product getById(@Param("id") Integer id);
     
-
+    
 }

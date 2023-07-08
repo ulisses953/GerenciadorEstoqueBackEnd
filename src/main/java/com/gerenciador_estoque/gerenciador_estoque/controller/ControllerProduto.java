@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @RestController
 @RequestMapping("/api/product")
 public class ControllerProduto {
@@ -25,8 +24,8 @@ public class ControllerProduto {
     private ServiceProduct serviceProduct; 
     
     @GetMapping
-    public ArrayList<Product> getAll(){
-        return serviceProduct.getAll();
+    public ArrayList<Product> findAll(){
+        return serviceProduct.findAll();
     }
     @GetMapping("/{id}")
     public Product getById(@PathVariable Integer id){
@@ -34,8 +33,8 @@ public class ControllerProduto {
     }
     
     @PostMapping()
-    public boolean addProducts(@RequestBody Product products){
-        return serviceProduct.addProduct(products);
+    public boolean save(@RequestBody Product products){
+        return serviceProduct.save(products);
     }
 
     @PostMapping("/many")

@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Product {
@@ -15,6 +17,12 @@ public class Product {
     private String description;
     private double sellingValue;
     private double purchaseValue;
+    private Integer amount;
+    
+    @ManyToOne
+    @JoinColumn(name = "Supplier")
+    private Supplier supplier;
+     
 
     // #region get e set
 
@@ -56,6 +64,22 @@ public class Product {
 
     public void setPurchaseValue(double purchaseValue) {
         this.purchaseValue = purchaseValue;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     // #endregion
