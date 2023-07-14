@@ -1,36 +1,37 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "tb_Product")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private long id;
     private String name;
     private String description;
     private double sellingValue;
     private double purchaseValue;
     private Integer amount;
     
-    @ManyToOne
-    @JoinColumn(name = "Supplier")
-    private Supplier supplier;
+    @ManyToMany(mappedBy = "product")
+    private List<Sector> sectors;
      
-
     // #region get e set
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -72,14 +73,6 @@ public class Product {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
-    }
-
-    public Supplier getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
     }
 
     // #endregion

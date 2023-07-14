@@ -7,6 +7,7 @@ import com.gerenciador_estoque.gerenciador_estoque.model.Product;
 import com.gerenciador_estoque.gerenciador_estoque.service.ServiceProduct;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,12 +25,12 @@ public class ControllerProduto {
     private ServiceProduct serviceProduct; 
     
     @GetMapping
-    public ArrayList<Product> findAll(){
+    public List<Product> findAll(){
         return serviceProduct.findAll();
     }
     @GetMapping("/{id}")
-    public Product getById(@PathVariable Integer id){
-        return serviceProduct.getById(id);
+    public Product findById(@PathVariable Integer id){
+        return serviceProduct.findById(id);
     }
     
     @PostMapping()

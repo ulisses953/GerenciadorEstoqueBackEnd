@@ -5,12 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EntityScan(basePackages = {
-			"com.gerenciador_estoque.gerenciador_estoque.model"
-})
-@EnableJpaRepositories(basePackages = {
-			"com.gerenciador_estoque.gerenciador_estoque.repository"
-            })
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+
+
 @SpringBootApplication
 public class GerenciadorEstoqueApplication {
 	
