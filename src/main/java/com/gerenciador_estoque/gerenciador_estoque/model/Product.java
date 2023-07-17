@@ -2,6 +2,7 @@ package com.gerenciador_estoque.gerenciador_estoque.model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,13 +19,15 @@ public class Product {
     private long id;
     private String name;
     private String description;
+    @Column(name = "selling_Value")
     private double sellingValue;
+    @Column(name = "purchase_Value")
     private double purchaseValue;
     private Integer amount;
-    
+
     @ManyToMany(mappedBy = "product")
     private List<Sector> sectors;
-     
+
     // #region get e set
 
     public Long getId() {
