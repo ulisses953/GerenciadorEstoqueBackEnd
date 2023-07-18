@@ -1,5 +1,6 @@
 package com.gerenciador_estoque.gerenciador_estoque.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,13 @@ import com.gerenciador_estoque.gerenciador_estoque.model.Sector;
 import com.gerenciador_estoque.gerenciador_estoque.service.ServiceSector;
 
 @RestController
-@RequestMapping("/api/Sector")
+@RequestMapping("/api/sector")
 public class ControllerSector {
     @Autowired
     private ServiceSector serviceSector;
 
     @GetMapping()
-    public List<Sector> findAll(){
+    public ArrayList<Sector> findAll(){
         return serviceSector.findAll();
     }
 
@@ -37,7 +38,7 @@ public class ControllerSector {
     }
 
     @PostMapping("/many")
-    public boolean saveAll(@RequestBody List<Sector> sectors){
+    public boolean saveAll(@RequestBody ArrayList<Sector> sectors){
         return serviceSector.saveAll(sectors);
     }
 
@@ -50,5 +51,14 @@ public class ControllerSector {
     public boolean delete(@PathVariable Integer id){
         return serviceSector.delete(id);
     }
+
+    public ServiceSector getServiceSector() {
+        return serviceSector;
+    }
+
+    public void setServiceSector(ServiceSector serviceSector) {
+        this.serviceSector = serviceSector;
+    }
+    
     
 }

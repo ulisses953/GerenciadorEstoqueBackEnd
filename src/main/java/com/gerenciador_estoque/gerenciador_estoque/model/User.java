@@ -20,7 +20,12 @@ public class User {
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
-    private Powers powers;
+    private Powers description;
+    private String location;
+    private String cpf;
+    private String phone;
+
+   
 
     //#region get and set
     public Long getId() {
@@ -46,14 +51,48 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public Powers getPowers() {
-        return powers;
+    
+     public String getPassword() {
+        return password;
     }
 
-    public void setPowers(Powers powers) {
-        this.powers = powers;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+    public Powers getDescription() {
+        return description;
+    }
+
+    public void setDescription(Powers description) {
+        this.description = description;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    
 
     //#endregion
 }

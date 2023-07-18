@@ -25,7 +25,7 @@ public class ControllerProduto {
     private ServiceProduct serviceProduct; 
     
     @GetMapping
-    public List<Product> findAll(){
+    public ArrayList<Product> findAll(){
         return serviceProduct.findAll();
     }
     @GetMapping("/{id}")
@@ -52,5 +52,12 @@ public class ControllerProduto {
     public boolean update(@PathVariable int id,@RequestBody Product product){
         return serviceProduct.update(id,product);
     }
+    public ServiceProduct getServiceProduct() {
+        return serviceProduct;
+    }
+    public void setServiceProduct(ServiceProduct serviceProduct) {
+        this.serviceProduct = serviceProduct;
+    }
    
+    
 }

@@ -14,8 +14,8 @@ public class ServiceSector {
     @Autowired
     private RepositorySector repositorySector;
     
-    public List<Sector> findAll(){
-        return (List<Sector>) repositorySector.findAll();
+    public ArrayList<Sector> findAll(){
+        return (ArrayList<Sector>) repositorySector.findAll();
     }
 
     public Sector findById(long id){

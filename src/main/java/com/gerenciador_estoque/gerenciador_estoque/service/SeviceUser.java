@@ -1,6 +1,5 @@
 package com.gerenciador_estoque.gerenciador_estoque.service;
 
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
