@@ -20,7 +20,7 @@ public class Sector {
     private Long id;
     private String name;
     private String description;
-
+    
     @ManyToMany(mappedBy = "sectors",fetch = FetchType.LAZY)
     private Set<Product> product = new HashSet<>();
     

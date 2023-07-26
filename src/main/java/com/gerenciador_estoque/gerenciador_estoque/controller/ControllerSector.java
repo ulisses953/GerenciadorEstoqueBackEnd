@@ -23,7 +23,7 @@ public class ControllerSector {
     private ServiceSector serviceSector;
 
     @GetMapping()
-    public ArrayList<Sector> findAll(){
+    public List<Sector> findAll(){
         return serviceSector.findAll();
     }
 

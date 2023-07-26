@@ -1,9 +1,7 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

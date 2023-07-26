@@ -20,7 +20,7 @@ public class User {
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
-    private Powers description;
+    private Powers powers;
     private String location;
     private String cpf;
     private String phone;
@@ -61,12 +61,12 @@ public class User {
         this.password = password;
     }
 
-    public Powers getDescription() {
-        return description;
+    public Powers getPowers() {
+        return powers;
     }
 
-    public void setDescription(Powers description) {
-        this.description = description;
+    public void setPowers(Powers powers) {
+        this.powers = powers;
     }
 
     public String getLocation() {

@@ -19,14 +19,5 @@ public class ClientDelivery {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    //@Column(name = "user_Delivery")
-    //private Client userDelivery;
-    //@Column(name = "user_Client")
-    //private Client userClient;
-    //private Stock stock;
-   // private Product product;
-    //private LocalDate departureDate;
-    //private LocalDate deleveryDate;
-    //private StatusDelivery status;
-   // private Integer freigh;
+
 }

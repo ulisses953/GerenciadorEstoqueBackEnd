@@ -1,6 +1,7 @@
 package com.gerenciador_estoque.gerenciador_estoque.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +21,15 @@ public class ServiceProduct {
     }
 
     
-    public ArrayList<Product> findAll(){
-        return (ArrayList<Product>) repositoryProduct.findAll();
+    public List<Product> findAll(){
+        return (List<Product>) repositoryProduct.findAll();
     }
    
     public Product findById(long id){
         return (Product) repositoryProduct.findById(id).get();
     }
   
-    public boolean addProducts(ArrayList<Product> products){
+    public boolean addProducts(List<Product> products){
         repositoryProduct.saveAll(products);
         return true;
     }
