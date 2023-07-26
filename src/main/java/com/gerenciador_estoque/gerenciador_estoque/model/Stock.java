@@ -1,9 +1,11 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import com.gerenciador_estoque.gerenciador_estoque.enumm.StockStatus;
+import com.gerenciador_estoque.gerenciador_estoque.enuns.StockStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -27,8 +29,8 @@ public class Stock {
     @Enumerated(EnumType.STRING)
     private StockStatus stockSatatus;
 
-    @ManyToMany()
-    private ArrayList<Product> products;
+    @ManyToMany(mappedBy = "stock")
+    private Set<Product> stock = new HashSet<>();
 
     public Long getId() {
         return id;

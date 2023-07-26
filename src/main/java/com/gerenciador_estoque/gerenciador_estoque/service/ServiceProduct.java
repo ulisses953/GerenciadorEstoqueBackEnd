@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gerenciador_estoque.gerenciador_estoque.interfaces.service;
 import com.gerenciador_estoque.gerenciador_estoque.model.Product;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryProduct;
 
@@ -18,12 +19,11 @@ public class ServiceProduct {
         return true;
     }
 
-
+    
     public ArrayList<Product> findAll(){
         return (ArrayList<Product>) repositoryProduct.findAll();
     }
    
-
     public Product findById(long id){
         return (Product) repositoryProduct.findById(id).get();
     }

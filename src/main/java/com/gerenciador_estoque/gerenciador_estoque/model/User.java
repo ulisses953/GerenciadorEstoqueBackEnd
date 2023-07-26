@@ -1,6 +1,6 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
-import com.gerenciador_estoque.gerenciador_estoque.enumm.Powers;
+import com.gerenciador_estoque.gerenciador_estoque.enuns.Powers;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -28,6 +28,7 @@ public class User {
    
 
     //#region get and set
+    
     public Long getId() {
         return id;
     }

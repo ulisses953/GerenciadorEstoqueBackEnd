@@ -1,8 +1,6 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
@@ -24,7 +22,7 @@ public class Sector {
     private String description;
 
     @ManyToMany(mappedBy = "sectors",fetch = FetchType.LAZY)
-    private  Set<Product> product = new HashSet<>();
+    private Set<Product> product = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -46,4 +44,5 @@ public class Sector {
     public void setDescription(String description) {
         this.description = description;
     }
+    
 }

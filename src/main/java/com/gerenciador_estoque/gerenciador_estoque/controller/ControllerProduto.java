@@ -20,44 +20,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/api/product")
 public class ControllerProduto {
-    
+
     @Autowired
-    private ServiceProduct serviceProduct; 
-    
+    private ServiceProduct serviceProduct;
+
     @GetMapping
-    public ArrayList<Product> findAll(){
+    public ArrayList<Product> findAll() {
         return serviceProduct.findAll();
     }
+
     @GetMapping("/{id}")
-    public Product findById(@PathVariable Integer id){
+    public Product findById(@PathVariable Integer id) {
         return serviceProduct.findById(id);
     }
-    
+
     @PostMapping()
-    public boolean save(@RequestBody Product products){
+    public boolean save(@RequestBody Product products) {
         return serviceProduct.save(products);
     }
 
     @PostMapping("/many")
-    public boolean addProducts(@RequestBody ArrayList<Product> products){
+    public boolean addProducts(@RequestBody ArrayList<Product> products) {
         return serviceProduct.addProducts(products);
     }
 
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable int id){
+    public boolean delete(@PathVariable int id) {
         return serviceProduct.delete(id);
     }
 
     @PutMapping("/{id}")
-    public boolean update(@PathVariable int id,@RequestBody Product product){
-        return serviceProduct.update(id,product);
+    public boolean update(@PathVariable int id, @RequestBody Product product) {
+        return serviceProduct.update(id, product);
     }
+
     public ServiceProduct getServiceProduct() {
         return serviceProduct;
     }
+
     public void setServiceProduct(ServiceProduct serviceProduct) {
         this.serviceProduct = serviceProduct;
     }
-   
-    
 }

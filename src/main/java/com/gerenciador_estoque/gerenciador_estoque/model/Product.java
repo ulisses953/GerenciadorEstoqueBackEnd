@@ -2,13 +2,12 @@ package com.gerenciador_estoque.gerenciador_estoque.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,13 +32,12 @@ public class Product {
     private Integer amount;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "FK_product_sector",
-        joinColumns = @JoinColumn(name = "product_id"),
-        inverseJoinColumns = @JoinColumn(name = "sector_id"))
+    @JoinTable(name = "FK_product_sector", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "sector_id"))
     private Set<Sector> sectors = new HashSet<>();
-    //@ManyToMany
-    //private List<Stock> stock; 
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "FK_product_stock", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
+    private Set<Stock>  stock =  new HashSet<>();
 
     // #region get e set
 
