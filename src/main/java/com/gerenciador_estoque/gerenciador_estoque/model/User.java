@@ -25,10 +25,8 @@ public class User {
     private String cpf;
     private String phone;
 
-   
+    // #region get and set
 
-    //#region get and set
-    
     public Long getId() {
         return id;
     }
@@ -52,8 +50,8 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-     public String getPassword() {
+
+    public String getPassword() {
         return password;
     }
 
@@ -93,7 +91,7 @@ public class User {
         this.phone = phone;
     }
 
-    
+    // #endregion
 
-    //#endregion
+    
 }

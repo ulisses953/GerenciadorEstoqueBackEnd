@@ -1,8 +1,6 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.gerenciador_estoque.gerenciador_estoque.enuns.StockStatus;
@@ -35,21 +33,27 @@ public class Stock {
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getLocation() {
         return location;
     }
+
     public void setLocation(String location) {
         this.location = location;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public int getTotalitens() {
         return totalitens;
     }
@@ -57,9 +61,11 @@ public class Stock {
     public void setTotalitens(int totalitens) {
         this.totalitens = totalitens;
     }
+
     public StockStatus getStockSatatus() {
         return stockSatatus;
     }
+
     public void setStockSatatus(StockStatus stockSatatus) {
         this.stockSatatus = stockSatatus;
     }

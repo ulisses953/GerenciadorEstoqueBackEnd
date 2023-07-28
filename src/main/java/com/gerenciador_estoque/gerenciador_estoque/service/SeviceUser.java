@@ -1,5 +1,6 @@
 package com.gerenciador_estoque.gerenciador_estoque.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,31 +13,33 @@ import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoruUser;
 public class SeviceUser {
     @Autowired
     private RepositoruUser repositoruUser;
-    
-    public User loginbyEmail(String email, String password){
+
+    public User loginbyEmail(String email, String password) {
         return repositoruUser.loginbyEmail(email, password);
     }
 
-    public User findByid(Long id){
-        return (User)repositoruUser.findById(id).get();
+    public User findByid(Long id) {
+        return (User) repositoruUser.findById(id).get();
     }
-    
-    public boolean save(User user){
+
+    public boolean save(User user) {
         repositoruUser.save(user);
         return true;
     }
 
-    public boolean delete(Long id){
+    public boolean delete(Long id) {
         repositoruUser.deleteById(id);
         return true;
     }
 
-    public boolean update(Long id, User user){
+    public boolean update(Long id, User user) {
         user.setId(id);
         repositoruUser.save(user);
         return true;
     }
-    public List<User> findAll(){
-        return (List<User>) repositoruUser.findAll();
+
+    public ArrayList<User> findAll() {
+        return (ArrayList<User>) repositoruUser.findAll();
     }
+
 }

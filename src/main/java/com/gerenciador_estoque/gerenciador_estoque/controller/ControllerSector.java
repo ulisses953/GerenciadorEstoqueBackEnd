@@ -51,14 +51,4 @@ public class ControllerSector {
     public boolean delete(@PathVariable Integer id){
         return serviceSector.delete(id);
     }
-
-    public ServiceSector getServiceSector() {
-        return serviceSector;
-    }
-
-    public void setServiceSector(ServiceSector serviceSector) {
-        this.serviceSector = serviceSector;
-    }
-    
-    
 }
