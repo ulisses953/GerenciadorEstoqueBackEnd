@@ -13,8 +13,8 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "tb_Sector")
-public class Sector {
+@Table(name = "tb_Category")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -69,4 +69,15 @@ public class Stock {
     public void setStockSatatus(StockStatus stockSatatus) {
         this.stockSatatus = stockSatatus;
     }
+
+    public Set<Product> getStock() {
+        return stock;
+    }
+
+    public void setStock(Set<Product> stock) {
+        this.stock = stock;
+    }
+
+
+
 }

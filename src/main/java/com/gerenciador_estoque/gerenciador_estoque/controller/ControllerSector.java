@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gerenciador_estoque.gerenciador_estoque.model.Sector;
+import com.gerenciador_estoque.gerenciador_estoque.model.Category;
 import com.gerenciador_estoque.gerenciador_estoque.service.ServiceSector;
 
 @RestController
@@ -23,27 +23,27 @@ public class ControllerSector {
     private ServiceSector serviceSector;
 
     @GetMapping()
-    public List<Sector> findAll(){
+    public List<Category> findAll(){
         return serviceSector.findAll();
     }
 
     @GetMapping("/{id}")
-    public Sector findById(@PathVariable Integer id){
+    public Category findById(@PathVariable Integer id){
         return serviceSector.findById(id);
     }
 
     @PostMapping()
-    public boolean save(@RequestBody Sector sector){
+    public boolean save(@RequestBody Category sector){
         return serviceSector.save(sector);
     }
 
     @PostMapping("/many")
-    public boolean saveAll(@RequestBody ArrayList<Sector> sectors){
+    public boolean saveAll(@RequestBody ArrayList<Category> sectors){
         return serviceSector.saveAll(sectors);
     }
 
     @PutMapping("{id}")
-    public boolean update(@PathVariable Integer id, @RequestBody Sector sector){
+    public boolean update(@PathVariable Integer id, @RequestBody Category sector){
         return serviceSector.update(id, sector);
     }
 

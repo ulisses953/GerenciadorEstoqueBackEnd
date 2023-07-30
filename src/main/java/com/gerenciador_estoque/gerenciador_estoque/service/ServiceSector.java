@@ -1,33 +1,32 @@
 package com.gerenciador_estoque.gerenciador_estoque.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-import com.gerenciador_estoque.gerenciador_estoque.model.Sector;
+import com.gerenciador_estoque.gerenciador_estoque.model.Category;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositorySector;
 
-@Repository
+@Service
 public class ServiceSector {
     @Autowired
     private RepositorySector repositorySector;
     
-    public List<Sector> findAll(){
-        return (List<Sector>) repositorySector.findAll();
+    public List<Category> findAll(){
+        return (List<Category>) repositorySector.findAll();
     }
 
-    public Sector findById(long id){
-        return (Sector) repositorySector.findById(id).get(); 
+    public Category findById(long id){
+        return (Category) repositorySector.findById(id).get(); 
     }
 
-    public boolean save(Sector sector){
+    public boolean save(Category sector){
         repositorySector.save(sector);
         return true;
     }
 
-    public boolean saveAll(List<Sector> sectors){
+    public boolean saveAll(List<Category> sectors){
         repositorySector.saveAll(sectors);
         return true;
     }
@@ -37,7 +36,7 @@ public class ServiceSector {
         return true;
     }
 
-    public boolean update(long id, Sector sector){
+    public boolean update(long id, Category sector){
         sector.setId(id);
         repositorySector.save(sector);
         return true;

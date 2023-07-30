@@ -31,7 +31,7 @@ public class Product {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "FK_product_sector", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "sector_id"))
-    private Set<Sector> sectors = new HashSet<>();
+    private Set<Category> sectors = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "FK_product_stock", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
@@ -91,11 +91,11 @@ public class Product {
         this.id = id;
     }
 
-    public Set<Sector> getSectors() {
+    public Set<Category> getSectors() {
         return sectors;
     }
 
-    public void setSectors(Set<Sector> sectors) {
+    public void setSectors(Set<Category> sectors) {
         this.sectors = sectors;
     }
 
