@@ -1,11 +1,13 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,20 +32,17 @@ public class Product {
     private Integer amount;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "FK_product_sector", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "sector_id"))
-    private Set<Category> sectors = new HashSet<>();
+    @JoinTable(name = "FK_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> category;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "FK_product_stock", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
-    private Set<Stock>  stock =  new HashSet<>();
-
-    // #region get e set
-
-    public Long getId() {
+    @ManyToMany(mappedBy = "products",fetch = FetchType.LAZY)
+    private List<Stock> stock;
+    
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -87,18 +86,15 @@ public class Product {
         this.amount = amount;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public List<Category> getCategory() {
+        return category;
     }
 
-    public Set<Category> getSectors() {
-        return sectors;
+    public void setCategory(List<Category> category) {
+        this.category = category;
     }
 
-    public void setSectors(Set<Category> sectors) {
-        this.sectors = sectors;
-    }
 
-    // #endregion
-
+    
+       
 }

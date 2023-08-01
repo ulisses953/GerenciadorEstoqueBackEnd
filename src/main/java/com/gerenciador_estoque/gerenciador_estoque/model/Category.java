@@ -1,16 +1,8 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_Category")
@@ -21,8 +13,8 @@ public class Category {
     private String name;
     private String description;
     
-    @ManyToMany(mappedBy = "sectors",fetch = FetchType.LAZY)
-    private Set<Product> product = new HashSet<>();
+    @ManyToMany(mappedBy = "category",fetch = FetchType.LAZY)
+    private List<Product> product;
     
     public Long getId() {
         return id;
@@ -38,11 +30,13 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
 }

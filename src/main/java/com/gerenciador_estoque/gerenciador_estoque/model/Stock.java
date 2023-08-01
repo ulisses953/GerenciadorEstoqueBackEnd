@@ -1,18 +1,10 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import com.gerenciador_estoque.gerenciador_estoque.enuns.StockStatus;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_stock")
@@ -25,10 +17,12 @@ public class Stock {
     private int totalitens;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "stock_Satatus")
     private StockStatus stockSatatus;
 
-    @ManyToMany(mappedBy = "stock")
-    private Set<Product> stock = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "FK_stock_product",joinColumns = @JoinColumn(name = "stock_id"), inverseJoinColumns = @JoinColumn(name = "Product_id"))
+    private List<Product> products;
 
     public Long getId() {
         return id;
@@ -70,14 +64,14 @@ public class Stock {
         this.stockSatatus = stockSatatus;
     }
 
-    public Set<Product> getStock() {
-        return stock;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setStock(Set<Product> stock) {
-        this.stock = stock;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
-
-
-
+    
+    
+  
 }
