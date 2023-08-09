@@ -1,8 +1,6 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -37,6 +35,9 @@ public class Product {
 
     @ManyToMany(mappedBy = "products",fetch = FetchType.LAZY)
     private List<Stock> stock;
+
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    private List<ClientDelivery> clientDelivery;
     
     public long getId() {
         return id;

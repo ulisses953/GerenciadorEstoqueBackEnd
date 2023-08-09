@@ -1,6 +1,7 @@
 package com.gerenciador_estoque.gerenciador_estoque.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.gerenciador_estoque.gerenciador_estoque.interfaces.ServiceInterface;
 import com.gerenciador_estoque.gerenciador_estoque.model.Stock;
@@ -22,13 +23,13 @@ public class ServiceStock implements ServiceInterface<Stock>{
     }
 
     @Override
-    public ArrayList<Stock> findAll() {
-        return (ArrayList<Stock>) repositoryStock.findAll();
+    public List<Stock> findAll() {
+        return (List<Stock>) repositoryStock.findAll();
     }
 
 
     @Override
-    public boolean saveAll(ArrayList<Stock> objects) {
+    public boolean saveAll(List<Stock> objects) {
         repositoryStock.saveAll(objects);
         return true;
     }

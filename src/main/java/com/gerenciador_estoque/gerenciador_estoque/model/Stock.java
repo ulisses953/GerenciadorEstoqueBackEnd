@@ -24,6 +24,9 @@ public class Stock {
     @JoinTable(name = "FK_stock_product",joinColumns = @JoinColumn(name = "stock_id"), inverseJoinColumns = @JoinColumn(name = "Product_id"))
     private List<Product> products;
 
+    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
+    private List<ClientDelivery> clientDeliveryStock;
+
     public Long getId() {
         return id;
     }
@@ -71,6 +74,9 @@ public class Stock {
     public void setProducts(List<Product> products) {
         this.products = products;
     }
+
+    
+    
     
     
   

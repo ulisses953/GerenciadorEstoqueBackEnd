@@ -54,11 +54,4 @@ public class ControllerProduto {
         return serviceProduct.update(id, product);
     }
 
-    public ServiceProduct getServiceProduct() {
-        return serviceProduct;
-    }
-
-    public void setServiceProduct(ServiceProduct serviceProduct) {
-        this.serviceProduct = serviceProduct;
-    }
 }

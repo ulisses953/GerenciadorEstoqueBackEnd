@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gerenciador_estoque.gerenciador_estoque.model.User;
-import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoruUser;
+import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryUser;
 
 @Service
 public class SeviceUser {
     @Autowired
-    private RepositoruUser repositoruUser;
+    private RepositoryUser repositoruUser;
 
     public User loginbyEmail(String email, String password) {
         return repositoruUser.loginbyEmail(email, password);

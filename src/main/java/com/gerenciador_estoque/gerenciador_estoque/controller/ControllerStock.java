@@ -1,6 +1,7 @@
 package com.gerenciador_estoque.gerenciador_estoque.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,7 +30,7 @@ public class ControllerStock implements ControllerInterfece<Stock>{
     }
 
     @GetMapping
-    public ArrayList<Stock> findAll() {
+    public List<Stock> findAll() {
        return serviceStock.findAll();
     }
 
@@ -39,7 +40,7 @@ public class ControllerStock implements ControllerInterfece<Stock>{
     }
 
     @PostMapping("/many")
-    public boolean saveAll(@RequestBody ArrayList<Stock> objects) {
+    public boolean saveAll(@RequestBody List<Stock> objects) {
         return serviceStock.saveAll(objects);
     }
 

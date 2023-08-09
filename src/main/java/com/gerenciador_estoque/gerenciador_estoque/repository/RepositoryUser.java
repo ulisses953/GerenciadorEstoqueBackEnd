@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.gerenciador_estoque.gerenciador_estoque.enuns.Powers;
 import com.gerenciador_estoque.gerenciador_estoque.model.User;
 
-public interface RepositoruUser extends JpaRepository<User, Long> {
+public interface RepositoryUser extends JpaRepository<User, Long> {
 
     @Query(value = "Select * from tb_user where powers = :powers", nativeQuery = true)
     public ArrayList<User> locateByPower(@Param("powers") Powers powers);

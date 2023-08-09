@@ -1,14 +1,14 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.format.annotation.NumberFormat;
+
 import com.gerenciador_estoque.gerenciador_estoque.enuns.Powers;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import jakarta.validation.constraints.Email;
 
 @Entity
@@ -19,13 +19,21 @@ public class User {
     private Long id;
     private String name;
     @Email
+    @Column(unique = true)
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private Powers powers;
     private String location;
     private String cpf;
+    @NumberFormat
     private String phone;
+
+    @OneToMany(mappedBy = "transporter", cascade = CascadeType.ALL)
+    private List<ClientDelivery> clientDeliveryTransporter;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<ClientDelivery> clientDeliveryClient;
 
     // #region get and set
 
@@ -94,5 +102,4 @@ public class User {
     }
     // #endregion
 
-    
 }
