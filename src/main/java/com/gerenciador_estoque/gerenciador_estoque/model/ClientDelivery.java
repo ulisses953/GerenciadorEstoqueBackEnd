@@ -38,6 +38,7 @@ public class ClientDelivery {
 
     private Double freight;
 
+    //#region get and set
     public Long getId() {
         return id;
     }
@@ -109,7 +110,34 @@ public class ClientDelivery {
     public void setFreight(Double freight) {
         this.freight = freight;
     }
-   
+    //#endregion 
+
+    //#region hashCode and equals
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ClientDelivery other = (ClientDelivery) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+    //#endregion
     
 
 }

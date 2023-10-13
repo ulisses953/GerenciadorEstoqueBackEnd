@@ -1,6 +1,5 @@
 package com.gerenciador_estoque.gerenciador_estoque.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.gerenciador_estoque.gerenciador_estoque.interfaces.ServiceInterface;

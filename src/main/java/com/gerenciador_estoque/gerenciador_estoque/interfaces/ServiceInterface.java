@@ -1,8 +1,6 @@
 package com.gerenciador_estoque.gerenciador_estoque.interfaces;
 
-import java.util.ArrayList;
 import java.util.List;
-
 
 public interface ServiceInterface<T> {
     

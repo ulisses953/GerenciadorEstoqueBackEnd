@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gerenciador_estoque.gerenciador_estoque.model.Category;
-import com.gerenciador_estoque.gerenciador_estoque.service.ServiceSector;
+import com.gerenciador_estoque.gerenciador_estoque.service.ServicoCategory;
 
 @RestController
-@RequestMapping("/api/sector")
-public class ControllerSector {
+@RequestMapping("/api/Category")
+public class ControllerCategory {
     @Autowired
-    private ServiceSector serviceSector;
+    private ServicoCategory serviceSector;
 
     @GetMapping()
     public List<Category> findAll(){

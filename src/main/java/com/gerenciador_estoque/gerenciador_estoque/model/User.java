@@ -1,15 +1,10 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.format.annotation.NumberFormat;
 
 import com.gerenciador_estoque.gerenciador_estoque.enuns.Powers;
 
 import jakarta.persistence.*;
-
-import jakarta.validation.constraints.Email;
 
 @Entity
 @Table(name = "tb_user")
@@ -18,16 +13,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @Email
-    @Column(unique = true)
-    private String email;
-    private String password;
     @Enumerated(EnumType.STRING)
     private Powers powers;
     private String location;
     private String cpf;
-    @NumberFormat
-    private String phone;
+    @OneToOne
+    @JoinColumn(name = "user")
+    private information informacoes;
 
     @OneToMany(mappedBy = "transporter", cascade = CascadeType.ALL)
     private List<ClientDelivery> clientDeliveryTransporter;
@@ -51,22 +43,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Powers getPowers() {
@@ -93,13 +69,41 @@ public class User {
         this.cpf = cpf;
     }
 
-    public String getPhone() {
-        return phone;
+    public information getInformacoes() {
+        return informacoes;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setInformacoes(information informacoes) {
+        this.informacoes = informacoes;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+    
+
     // #endregion
 
 }

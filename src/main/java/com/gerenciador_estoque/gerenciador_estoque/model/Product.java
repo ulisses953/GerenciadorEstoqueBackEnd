@@ -39,6 +39,7 @@ public class Product {
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
     private List<ClientDelivery> clientDelivery;
     
+    //#region Get and set
     public long getId() {
         return id;
     }
@@ -95,7 +96,50 @@ public class Product {
         this.category = category;
     }
 
+    //#endregion 
+
+    //#region hasCode and equals
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (id ^ (id >>> 32));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Product other = (Product) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
+    //#endregion
+
+    //#region constructors
+    public Product(long id, String name, String description, double sellingValue, double purchaseValue, Integer amount,
+            List<Category> category, List<Stock> stock, List<ClientDelivery> clientDelivery) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.sellingValue = sellingValue;
+        this.purchaseValue = purchaseValue;
+        this.amount = amount;
+        this.category = category;
+        this.stock = stock;
+        this.clientDelivery = clientDelivery;
+    }
+
+    public Product() {
+    }
+    
+    //#endregion
 
     
-       
 }

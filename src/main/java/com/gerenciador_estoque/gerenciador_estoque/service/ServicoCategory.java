@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gerenciador_estoque.gerenciador_estoque.model.Category;
-import com.gerenciador_estoque.gerenciador_estoque.repository.RepositorySector;
+import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryCategory;
 
 @Service
-public class ServiceSector {
+public class ServicoCategory {
     @Autowired
-    private RepositorySector repositorySector;
+    private RepositoryCategory repositorySector;
     
     public List<Category> findAll(){
         return (List<Category>) repositorySector.findAll();
