@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "tb_information")
-public class information {
+public class Information {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -73,7 +73,7 @@ public class information {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        information other = (information) obj;
+        Information other = (Information) obj;
         if (id != other.id)
             return false;
         return true;

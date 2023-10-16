@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gerenciador_estoque.gerenciador_estoque.error.ResourceNotFound;
 import com.gerenciador_estoque.gerenciador_estoque.model.Category;
 import com.gerenciador_estoque.gerenciador_estoque.model.Product;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryCategory;
@@ -17,30 +18,30 @@ public class ServiceProduct {
     private RepositoryProduct repositoryProduct;
     @Autowired
     private RepositoryCategory repositoryCategory;
-    
+
     public boolean save(Product product) {
-        
+
         product.setCategory(filterCategories(product.getCategory()));
-        
+
         repositoryProduct.save(product);
 
         return true;
     }
-    /**
-     * This function aims to find the product id in the database
-     * @param categories
-     * @return
-     */
+
     protected List<Category> filterCategories(List<Category> categories) {
         List<Category> filteredCategory = new ArrayList<Category>();
+
         for (Category category : categories) {
-            category = repositoryCategory.findById(category.getId()).get();
-            if( category != null ) {
-                filteredCategory.add(category);
-            }else {
-                
+
+            if (category.getId() != null) {
+                category = repositoryCategory.findById(category.getId())
+                .orElseThrow(() -> new ResourceNotFound("The id passed is invalido"));
             }
+
+            filteredCategory.add(category);
+
         }
+
         return filteredCategory;
     }
 

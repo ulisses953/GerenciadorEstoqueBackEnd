@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,23 +36,26 @@ public class ControllerProduto {
     }
 
     @PostMapping()
-    public boolean save(@RequestBody Product products) {
-        return serviceProduct.save(products);
+    public ResponseEntity<?> save(@RequestBody Product products) {
+        serviceProduct.save(products);
+        return ResponseEntity.ok("");
     }
-
     @PostMapping("/many")
-    public boolean addProducts(@RequestBody ArrayList<Product> products) {
-        return serviceProduct.addProducts(products);
+    public ResponseEntity<?> addProducts(@RequestBody ArrayList<Product> products) { 
+        serviceProduct.addProducts(products);
+        return ResponseEntity.ok("");
     }
 
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable int id) {
-        return serviceProduct.delete(id);
+    public  ResponseEntity<?>  delete(@PathVariable int id) {
+        serviceProduct.delete(id);
+        return ResponseEntity.ok("");
     }
 
     @PutMapping("/{id}")
-    public boolean update(@PathVariable int id, @RequestBody Product product) {
-        return serviceProduct.update(id, product);
+    public  ResponseEntity<?>  update(@PathVariable int id, @RequestBody Product product) {
+        serviceProduct.update(id, product);
+        return ResponseEntity.ok("");
     }
 
 }

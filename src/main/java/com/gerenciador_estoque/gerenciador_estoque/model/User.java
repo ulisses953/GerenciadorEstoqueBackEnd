@@ -19,7 +19,7 @@ public class User {
     private String cpf;
     @OneToOne
     @JoinColumn(name = "user")
-    private information informacoes;
+    private Information informacoes;
 
     @OneToMany(mappedBy = "transporter", cascade = CascadeType.ALL)
     private List<ClientDelivery> clientDeliveryTransporter;
@@ -69,11 +69,11 @@ public class User {
         this.cpf = cpf;
     }
 
-    public information getInformacoes() {
+    public Information getInformacoes() {
         return informacoes;
     }
 
-    public void setInformacoes(information informacoes) {
+    public void setInformacoes(Information informacoes) {
         this.informacoes = informacoes;
     }
 
