@@ -5,13 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.gerenciador_estoque.gerenciador_estoque.interfaces.ControllerInterfece;
 import com.gerenciador_estoque.gerenciador_estoque.model.ClientDelivery;
 import com.gerenciador_estoque.gerenciador_estoque.service.ServiceClientDelivery;
 
 @RestController
 @RequestMapping("api/Client/Delivery")
-public class ControllerClientDelivery implements ControllerInterfece<ClientDelivery> {
+public class ControllerClientDelivery {
     @Autowired
     private ServiceClientDelivery service;
 

@@ -2,6 +2,7 @@ package com.gerenciador_estoque.gerenciador_estoque.service;
 
 import java.util.List;
 
+import com.gerenciador_estoque.gerenciador_estoque.error.NotFoundException;
 import com.gerenciador_estoque.gerenciador_estoque.interfaces.ServiceInterface;
 import com.gerenciador_estoque.gerenciador_estoque.model.Stock;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryStock;
@@ -26,7 +27,6 @@ public class ServiceStock implements ServiceInterface<Stock>{
         return (List<Stock>) repositoryStock.findAll();
     }
 
-
     @Override
     public boolean saveAll(List<Stock> objects) {
         repositoryStock.saveAll(objects);
@@ -35,6 +35,7 @@ public class ServiceStock implements ServiceInterface<Stock>{
 
     @Override
     public boolean update(long id, Stock object) {
+        repositoryStock.findById(id).orElseThrow(() ->new NotFoundException("Service id not found" + id));
         object.setId(id);
         return save(object);
     }
@@ -49,6 +50,5 @@ public class ServiceStock implements ServiceInterface<Stock>{
     public Stock findById(long id) {
         return repositoryStock.findById(id).get();
     }
-
 
 }

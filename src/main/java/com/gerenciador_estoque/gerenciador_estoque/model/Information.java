@@ -1,22 +1,24 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import jakarta.validation.constraints.Email;
 
 @Entity
-@Data
 @Table(name = "tb_information")
 public class Information {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nameDiscord;
+    
     private String number;
+    @Email
     private String email;
 
     @OneToOne

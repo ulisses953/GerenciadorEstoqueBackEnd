@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gerenciador_estoque.gerenciador_estoque.interfaces.ControllerInterfece;
 import com.gerenciador_estoque.gerenciador_estoque.model.Stock;
 import com.gerenciador_estoque.gerenciador_estoque.service.ServiceStock;
 
 
 @RestController
 @RequestMapping("api/stock")
-public class ControllerStock implements ControllerInterfece<Stock>{
+public class ControllerStock {
     @Autowired
     ServiceStock serviceStock;
 

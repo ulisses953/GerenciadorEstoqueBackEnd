@@ -5,6 +5,7 @@ import java.util.List;
 import com.gerenciador_estoque.gerenciador_estoque.enuns.Powers;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_user")
@@ -12,10 +13,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     private String name;
     @Enumerated(EnumType.STRING)
+    
     private Powers powers;
-    private String location;
+    private String country;
+    private String state;
+    private String city;
     private String cpf;
     @OneToOne
     @JoinColumn(name = "user")
@@ -53,12 +58,28 @@ public class User {
         this.powers = powers;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCountry() {
+        return country;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getCpf() {

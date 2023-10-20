@@ -3,6 +3,7 @@ package com.gerenciador_estoque.gerenciador_estoque.model;
 import java.util.List;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_Category")
@@ -10,6 +11,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
     private String name;
     private String description;
 
