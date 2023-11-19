@@ -1,18 +1,26 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.gerenciador_estoque.gerenciador_estoque.enuns.Powers;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
 
 @Entity
 @Table(name = "tb_user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     
     private String name;
     @Enumerated(EnumType.STRING)
@@ -22,23 +30,27 @@ public class User {
     private String state;
     private String city;
     private String cpf;
-    @OneToOne
-    @JoinColumn(name = "user")
-    private Information informacoes;
+    private String rg;
+    private String phone; 
+    private String email;
+    private String password;
 
-    @OneToMany(mappedBy = "transporter", cascade = CascadeType.ALL)
-    private List<ClientDelivery> clientDeliveryTransporter;
-
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<ClientDelivery> clientDeliveryClient;
 
     // #region get and set
 
-    public Long getId() {
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -90,20 +102,36 @@ public class User {
         this.cpf = cpf;
     }
 
-    public Information getInformacoes() {
-        return informacoes;
+    public String getRg() {
+        return rg;
     }
 
-    public void setInformacoes(Information informacoes) {
-        this.informacoes = informacoes;
+    public void setRg(String rg) {
+        this.rg = rg;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

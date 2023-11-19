@@ -11,34 +11,8 @@ import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryUser;
 @Service
 public class SeviceUser {
     @Autowired
-    private RepositoryUser repositoruUser;
+    private RepositoryUser repositoryUser;
 
-    public User loginbyEmail(String email, String password) {
-        return repositoruUser.loginbyEmail(email, password);
-    }
-
-    public User findByid(Long id) {
-        return (User) repositoruUser.findById(id).get();
-    }
-
-    public boolean save(User user) {
-        repositoruUser.save(user);
-        return true;
-    }
-
-    public boolean delete(Long id) {
-        repositoruUser.deleteById(id);
-        return true;
-    }
-
-    public boolean update(Long id, User user) {
-        user.setId(id);
-        repositoruUser.save(user);
-        return true;
-    }
-
-    public ArrayList<User> findAll() {
-        return (ArrayList<User>) repositoruUser.findAll();
-    }
+    
 
 }

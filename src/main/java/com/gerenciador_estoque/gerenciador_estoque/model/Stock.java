@@ -9,13 +9,14 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "tb_stock")
 public class Stock {
+     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String location;
     private String description;
     private int totalitens;
-
+    /* 
     @Enumerated(EnumType.STRING)
     @Column(name = "stock_Satatus")
     private StockStatus stockSatatus;
@@ -26,6 +27,7 @@ public class Stock {
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
     private List<ClientDelivery> clientDeliveryStock;
+    */
 
     public Long getId() {
         return id;
@@ -57,23 +59,7 @@ public class Stock {
 
     public void setTotalitens(int totalitens) {
         this.totalitens = totalitens;
-    }
-
-    public StockStatus getStockSatatus() {
-        return stockSatatus;
-    }
-
-    public void setStockSatatus(StockStatus stockSatatus) {
-        this.stockSatatus = stockSatatus;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
+    }    
 
     @Override
     public int hashCode() {
@@ -99,10 +85,4 @@ public class Stock {
             return false;
         return true;
     }
-
-    
-    
-    
-    
-  
 }
