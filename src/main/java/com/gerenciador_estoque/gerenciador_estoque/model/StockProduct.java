@@ -2,24 +2,17 @@ package com.gerenciador_estoque.gerenciador_estoque.model;
 
 import java.util.UUID;
 
-import com.gerenciador_estoque.gerenciador_estoque.enums.StatusStock;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_Stock")
-public class Stock {
-    @Id
+@Table(name = "tb_stock_product")
+public class StockProduct {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String location;
-    private String description;
-    private int totaItens;
-    private StatusStock statusStock;
-
-
+    private Stock stock;
+    private Product product;
+    private int amount;
 }

@@ -1,25 +1,27 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
-import com.gerenciador_estoque.gerenciador_estoque.enums.StatusStock;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_Stock")
-public class Stock {
+@Table(name = "tb_cart")
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String location;
-    private String description;
-    private int totaItens;
-    private StatusStock statusStock;
-
+    private User user;
+    private Product product;
+    @Column(name = "date_created")
+    private LocalDate dateCreated;
+    @Column(name = "delivery_date")
+    private LocalDate deliveryDate;
 
 }
