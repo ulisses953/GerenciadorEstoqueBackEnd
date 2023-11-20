@@ -1,25 +1,28 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
-import java.util.UUID;
+import java.util.List;
 
-import com.gerenciador_estoque.gerenciador_estoque.enums.StatusStock;
+import com.gerenciador_estoque.gerenciador_estoque.enums.StockStatus;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tb_Stock")
+@Table(name = "tb_stock")
 public class Stock {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
+    private String name;
     private String location;
     private String description;
-    private int totaItens;
-    private StatusStock statusStock;
-
-
+    @Column(name = "toatal_itens")
+    private int totalItens;
+    
+    @Column(name = "stock_status")
+    @Enumerated(EnumType.STRING)
+    private StockStatus stockStatus;
+    
+    @OneToMany(mappedBy = "stock")
+    private List<StockProducts> stockProducts;
+    
 }
