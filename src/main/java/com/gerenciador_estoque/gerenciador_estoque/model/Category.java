@@ -2,7 +2,10 @@ package com.gerenciador_estoque.gerenciador_estoque.model;
 
 import java.util.List;
 
+import org.springframework.validation.annotation.Validated;
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_category")
@@ -10,6 +13,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @NotBlank(message = "the field name must be filled in correctly")
     private String name;
     private String description;
 
@@ -47,5 +51,16 @@ public class Category {
     }
 
     //#endregion
+
+    //#region
+    public Category(){
+
+    }
+
+    public Category(Long id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 
 }
