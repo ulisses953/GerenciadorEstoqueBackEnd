@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -21,38 +22,55 @@ public class ServiceCategory implements ServiceInterface<Category, Long> {
     private RepositoryCategory repositoryCategory;
 
     @Override
-    public Category save(@Valid Category object) throws Exception {
-        return repositoryCategory.save(object);
+    public Boolean save(@Valid Category object) throws Exception {
+        if (object == null) {
+            throw new IllegalArgumentException("object is null");
+        }
+
+        if (repositoryCategory.findById(object.getId()) != null) {
+            throw new DataIntegrityViolationException("Category with the same ID already exists");
+        }
+
+        repositoryCategory.save(object);
+
+        return true;
     }
 
     @Override
-    public Category update(Category object) throws Exception {
+    public Boolean update(Category object) throws Exception {
         return update(object,object.getId());
     }
 
     @Override
-    public Category update(Category object, Long id) throws Exception {
+    public Boolean update(@Valid Category object, Long id) throws Exception {
         if (findById(id).isEmpty()) {
-            throw new EntityNotFoundException("Product with ID" +id+" not found");
+            throw new EntityNotFoundException("Product with ID" + id +" not found");
+        }
+        if (object == null){
+            throw new IllegalArgumentException("object is not null");
         }
 
         object.setId(id);
 
-        return repositoryCategory.save(object);
+        repositoryCategory.save(object);
+
+        return true;
        
     }
 
     @Override
-    public Category delete(Long id) throws Exception {
-        final Category category = findById(id).get();
+    public Boolean delete(Long id) {
+        if (findById(id).isEmpty()){
+            return false;
+        }
 
-        repositoryCategory.delete(category);
+        repositoryCategory.deleteById(id);
 
-        return category;
+        return true;
     }
 
     @Override
-    public Optional<Category> findById(Long id) throws Exception {
+    public Optional<Category> findById(Long id)  {
         if (id == null) {
             return null;
         }
@@ -61,7 +79,7 @@ public class ServiceCategory implements ServiceInterface<Category, Long> {
     }
 
     @Override
-    public List<Category> findAll() throws Exception {
+    public List<Category> findAll() {
         return repositoryCategory.findAll();
     }
     

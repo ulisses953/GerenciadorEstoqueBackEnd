@@ -2,8 +2,6 @@ package com.gerenciador_estoque.gerenciador_estoque.model;
 
 import java.util.List;
 
-import org.springframework.validation.annotation.Validated;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -62,5 +60,17 @@ public class Category {
         this.name = name;
         this.description = description;
     }
+    
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+    
+    @Override
+    public String toString() {
+        return "Category [id=" + id + ", name=" + name + ", description=" + description + ", product=" + product + "]";
+    }
+
+    
 
 }

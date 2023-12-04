@@ -3,16 +3,22 @@
 
 Objetivo desse projeto é o desenvolvimento de uma API REST de gerenciamento de estoque utiliando como tecnologias o spring boot, PostgreSQL e o java.
 
+# Test
 
-# Diagramas 
+## Nomenclatura
+
+   **Test_nomeDoMetodo__EstadoDoTeste__Expect_ComportamentoEsperado_**
+
+# Diagramas
 
 ## Diagrama do banco de dados
 
 <img src="doc\DiagramaBanco.png">
 
-## Diagrama de caso de uso 
+## Diagrama de caso de uso
 
 ## Tecnologias
+
 <p>
    <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white"/>
    <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"/>
@@ -24,4 +30,5 @@ Objetivo desse projeto é o desenvolvimento de uma API REST de gerenciamento de 
 </p>
 
 ## User
+
 - [@ulisses953](https://github.com/ulisses953)

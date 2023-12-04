@@ -7,13 +7,13 @@ import jakarta.validation.Valid;
 
 public interface ServiceInterface<T, ID> {
     
-    public T save(@Valid T object) throws Exception;
+    public Boolean save(@Valid T object) throws Exception;
     
-    public T update(T object) throws Exception;
+    public Boolean update(T object) throws Exception;
 
-    public T update(T object,ID id)throws Exception;
+    public Boolean update(@Valid T object,ID id)throws Exception;
 
-    public T delete(ID id)throws Exception;
+    public Boolean delete(ID id)throws Exception;
     
     public Optional<T> findById(ID id)throws Exception;
 
