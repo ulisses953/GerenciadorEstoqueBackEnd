@@ -68,7 +68,7 @@ public class TestServiceCategory {
         when(repositoryCategory.save(ACTUAL)).thenReturn(EXPECTED);
         when(repositoryCategory.findById(ACTUAL.getId())).thenReturn(null);
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(ConstraintViolationException.class, () -> {
             serviceCategory.save(ACTUAL);
         }, () -> "");
 

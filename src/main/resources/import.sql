@@ -13,7 +13,7 @@ INSERT INTO tb_category (id, name, description) VALUES (10,'Joias', 'Joias');
 INSERT INTO tb_category (id, name, description) VALUES (11,'sex toys', 'sex toys');
 
 --production 
-INSERT into tb_product (id,name,description,sale_value) VALUES (1,'dildo', 'tamanho de 30 cm', '500');
+INSERT into tb_product (id,name,description,sale_value) VALUES (1,'dildo', 'tamanho de 50 cm', '500');
 
 INSERT into tb_category_product (category_id,product_id) VALUES (11,1);
 
