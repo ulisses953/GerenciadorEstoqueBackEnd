@@ -1,13 +1,26 @@
 
 # Desenvolvimento de um Gerenciador de Estoque
 
-Objetivo desse projeto é o desenvolvimento de uma API REST de gerenciamento de estoque utiliando como tecnologias o spring boot, PostgreSQL e o java.
+Objetivo desse projeto é o desenvolvimento de uma API REST de gerenciamento de estoque utilizando como tecnologias o spring boot, PostgreSQL e o java.
 
 # Test
 
-## Nomenclatura
+## Test Unitario
+   O projeto apresenta teste unitários para todas as funcionalidade do service e dos controllers, para não possuir uma dependência com o banco de dados todas as funções do repository são mocadas, assim apenas testando a funcionalidade das funções.
 
+### Code coverage
+   ![Alt text](doc\image.png)
+
+### Nomenclatura
    **Test_nomeDoMetodo__EstadoDoTeste__Expect_ComportamentoEsperado_**
+
+### Comando Para executar o jacoco
+
+```CMD
+   mvn clean install jacoco:report
+```
+
+O arquivo fica localizado no ``target\site\jacoco\index.html``
 
 # Diagramas
 

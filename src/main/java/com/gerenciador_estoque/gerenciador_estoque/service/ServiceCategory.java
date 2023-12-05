@@ -71,8 +71,8 @@ public class ServiceCategory implements ServiceInterface<Category, Long> {
 
     @Override
     public Optional<Category> findById(Long id)  {
-        if (id == null) {
-            return null;
+        if (id < 0 ) {
+            return Optional.empty();
         }
 
         return repositoryCategory.findById(id);

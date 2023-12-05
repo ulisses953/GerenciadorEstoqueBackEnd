@@ -46,8 +46,7 @@ public class ControllerCategory implements ControllerInterface<Long, Category> {
         }catch (Exception e) {
             return new ResponseEntity<>(new DefaultError("Internal Server Error", e.toString(), new Date(), 500),
                     HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        
+        }  
     }
 
     @PutMapping("{id}")
@@ -89,10 +88,9 @@ public class ControllerCategory implements ControllerInterface<Long, Category> {
         try {
             return new ResponseEntity<> (serviceCategory.findAll(), HttpStatus.OK);
         } catch (Exception e) {
-             return new ResponseEntity<>(new DefaultError("IllegalArgumentException", e.toString(), new Date(), 400),
+            return new ResponseEntity<>(new DefaultError("IllegalArgumentException", e.toString(), new Date(), 400),
                     HttpStatus.BAD_REQUEST);
         }
     }
-
 
 }

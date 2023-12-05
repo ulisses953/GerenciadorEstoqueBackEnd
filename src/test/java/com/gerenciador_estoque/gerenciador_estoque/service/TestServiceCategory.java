@@ -1,10 +1,13 @@
 package com.gerenciador_estoque.gerenciador_estoque.service;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +16,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import com.gerenciador_estoque.gerenciador_estoque.model.Category;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryCategory;
@@ -36,8 +40,9 @@ public class TestServiceCategory {
 
     }
 
+    // **Test_nomeDoMetodo__EstadoDoTeste__Expect_ComportamentoEsperado_**
     @Test
-    public void saveTrue() throws Exception {
+    public void Test_save_Expect_true() throws Exception {
         final Category ACTUAL = new Category(1l, "Sex Tools", "produtos de sexo");
 
         when(repositoryCategory.save(ACTUAL)).thenReturn(ACTUAL);
@@ -49,7 +54,19 @@ public class TestServiceCategory {
     }
 
     @Test
-    public void saveObjectedIsNull() throws Exception {
+    public void Test_save_objectAlreadyExists_Expect_throwDataIntegrityViolationException() throws Exception {
+        final Category ACTUAL = new Category(1l, "Sex Tools", "produtos de sexo");
+
+        when(repositoryCategory.save(ACTUAL)).thenReturn(ACTUAL);
+        when(repositoryCategory.findById(ACTUAL.getId())).thenReturn(Optional.of(new Category(11l, "jogos", "")));
+
+        assertThrows(DataIntegrityViolationException.class, () -> {
+            serviceCategory.save(ACTUAL);
+        }, () -> " ");
+    }
+
+    @Test
+    public void Test_save_ObjectIsNull__Expect_throwIllegalArgumentException() throws Exception {
         final Category ACTUAL = null;
 
         when(repositoryCategory.save(ACTUAL)).thenReturn(ACTUAL);
@@ -113,20 +130,20 @@ public class TestServiceCategory {
     }
 
     @Test
-    public void testFindByIdIdIsNull() throws Exception {
-
-        when(repositoryCategory.findById(1l)).thenReturn(null);
-
-        assertEquals(Optional.empty(), repositoryCategory.findById(null));
-
-    }
-
-    @Test
-    public void testFindByIdIdIsNotExiste() throws Exception {
+    public void Test_findById_idnotExistInDatabase_Expect_OptinalEmpty() throws Exception {
 
         when(repositoryCategory.findById(1l)).thenReturn(Optional.empty());
 
         assertEquals(Optional.empty(), repositoryCategory.findById(1L));
+
+    }
+
+    @Test
+    public void Test_findById_idNegative_Expect_OptinalEmpty() throws Exception {
+
+        when(repositoryCategory.findById(-1l)).thenReturn(Optional.empty());
+
+        assertEquals(Optional.empty(), repositoryCategory.findById(-1L));
 
     }
 
@@ -141,8 +158,6 @@ public class TestServiceCategory {
 
         assertEquals(true, serviceCategory.update(ACTUAL));
     }
-
-    // **Test_nomeDoMetodo__EstadoDoTeste__Expect_ComportamentoEsperado_**
 
     @Test
     public void test_update_IdnotExist_Expect_throwEntityNotFoundException() throws Exception {
@@ -196,6 +211,19 @@ public class TestServiceCategory {
         when(serviceCategory.findById(ACTUAL.getId())).thenReturn(Optional.empty());
 
         assertEquals(EXPECTED, serviceCategory.delete(ACTUAL.getId()));
+    }
+
+    @Test
+    public void test_findAll_Expected_list() {
+        Category obj = new Category(1l, "video game", "");
+        List<Category> ACTUAL = new ArrayList<Category>();
+        ACTUAL.add(obj);
+        List<Category> EXPECTED = new ArrayList<Category>();
+        EXPECTED.add(obj);
+
+        when(serviceCategory.findAll()).thenReturn(EXPECTED);
+
+        assertArrayEquals(EXPECTED.toArray(), ACTUAL.toArray());
     }
 
 }
