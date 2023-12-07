@@ -3,7 +3,6 @@ package com.gerenciador_estoque.gerenciador_estoque.model;
 import java.util.List;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_category")
@@ -11,7 +10,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @NotBlank(message = "the field name must be filled in correctly")
+    //@NotBlank(message = "the field name must be filled in correctly") 
     private String name;
     private String description;
 

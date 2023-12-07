@@ -5,7 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.gerenciador_estoque.gerenciador_estoque.model.Category;
 
+
 @Repository
-public interface RepositoryCategory  extends JpaRepository<Category,Long>{
-    
+public interface RepositoryCategory extends JpaRepository<Category,Long>{
+
 }

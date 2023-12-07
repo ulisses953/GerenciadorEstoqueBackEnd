@@ -4,18 +4,22 @@ package com.gerenciador_estoque.gerenciador_estoque.model;
 import java.util.List;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_product")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String name;
     private String description;
     @Column(name = "sale_value")
+    @NotNull
     private Double saleValue;
-
+    
     @ManyToMany(mappedBy = "product")
     private List<Category> categories;
 
@@ -60,14 +64,6 @@ public class Product {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
-    }
-
-    public List<StockProducts> getStockProducts() {
-        return StockProducts;
-    }
-
-    public void setStockProducts(List<StockProducts> stockProducts) {
-        StockProducts = stockProducts;
     }
 
     public Product(Long id, String name, String description, Double saleValue, List<Category> categories,

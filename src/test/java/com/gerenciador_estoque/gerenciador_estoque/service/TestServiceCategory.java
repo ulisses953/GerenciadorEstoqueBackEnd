@@ -214,6 +214,15 @@ public class TestServiceCategory {
     }
 
     @Test
+    public void test_findbyid_idIsNegative_Expect_empty() {
+        final Category ACTUAL = new Category(-1l, "video Game", "");
+
+        when(serviceCategory.findById(ACTUAL.getId())).thenReturn(Optional.empty());
+
+        assertEquals(true, serviceCategory.findById(ACTUAL.getId()).isEmpty());
+    }
+
+    @Test
     public void test_findAll_Expected_list() {
         Category obj = new Category(1l, "video game", "");
         List<Category> ACTUAL = new ArrayList<Category>();
@@ -225,5 +234,6 @@ public class TestServiceCategory {
 
         assertArrayEquals(EXPECTED.toArray(), ACTUAL.toArray());
     }
+   
 
 }

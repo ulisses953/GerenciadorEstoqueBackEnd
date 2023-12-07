@@ -2,6 +2,7 @@ package com.gerenciador_estoque.gerenciador_estoque.controller;
 
 import java.util.Date;
 
+import org.hibernate.jdbc.Expectations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,28 +17,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gerenciador_estoque.gerenciador_estoque.error.DefaultError;
-import com.gerenciador_estoque.gerenciador_estoque.model.Category;
-import com.gerenciador_estoque.gerenciador_estoque.service.ServiceCategory;
+import com.gerenciador_estoque.gerenciador_estoque.model.Product;
+import com.gerenciador_estoque.gerenciador_estoque.service.ServiceProducts;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 
+@CrossOrigin
 @RestController
-@RequestMapping("api/categories")
-
-//implements ControllerInterface<Long, Category>
-public class ControllerCategory {
-
+@RequestMapping(value = "/api/products")
+public class ControllerProduct {
     @Autowired
-    ServiceCategory serviceCategory;
+    private ServiceProducts serviceProducts;
 
-    @CrossOrigin()
-    @PostMapping()
-    public ResponseEntity<?> save(@RequestBody Category object) {
+    @CrossOrigin
+    @PostMapping
+    public ResponseEntity<?> save(@RequestBody Product product) {
         try {
-            serviceCategory.save(object);
-
-            return new ResponseEntity<Category>(object, HttpStatus.CREATED);
+            return new ResponseEntity<>(serviceProducts.save(product), HttpStatus.CREATED);
 
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(new DefaultError("IllegalArgumentException", e.toString(), new Date(), 400),
@@ -50,12 +47,34 @@ public class ControllerCategory {
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @CrossOrigin
+    @GetMapping("{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(serviceProducts.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new DefaultError("Internal Server Error", e.toString(), new Date(), 500),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping()
+    public ResponseEntity<?> findAll() {
+        try {
+            return new ResponseEntity<>(serviceProducts.findAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new DefaultError("IllegalArgumentException", e.toString(), new Date(), 400),
+                    HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @CrossOrigin
     @PutMapping("{id}")
-    public ResponseEntity<?> update(@RequestBody Category object, @PathVariable Long id) {
+    public ResponseEntity<?> update(@RequestBody Product object, @PathVariable Long id) {
         try {
-            serviceCategory.update(object, id);
-            return new ResponseEntity<>(object, HttpStatus.OK);
+            return new ResponseEntity<>(serviceProducts.update(object, id), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(new DefaultError("Bad Request", e.toString(), new Date(), 400),
                     HttpStatus.BAD_REQUEST);
@@ -67,35 +86,31 @@ public class ControllerCategory {
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
-            return new ResponseEntity<>(serviceCategory.delete(id),HttpStatus.OK);
+            return new ResponseEntity<>(serviceProducts.delete(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new DefaultError("Internal Server Error", e.toString(), new Date(), 500),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @CrossOrigin
-    @GetMapping("{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id) {
+
+    @GetMapping("/category/{id}")
+    public ResponseEntity<?> getProductsByCategoryId(@PathVariable Long id) {
         try {
-            return new ResponseEntity<>(serviceCategory.findById(id), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new DefaultError("Internal Server Error", e.toString(), new Date(), 500),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    @CrossOrigin
-    @GetMapping()
-    public ResponseEntity<?> findAll() {
-        try {
-            return new ResponseEntity<>(serviceCategory.findAll(), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new DefaultError("IllegalArgumentException", e.toString(), new Date(), 400),
+            return new ResponseEntity<>(serviceProducts.getProductsByCategoryId(id), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(new DefaultError("Bad Request", e.toString(), new Date(), 400),
                     HttpStatus.BAD_REQUEST);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(new DefaultError("Not Found", e.toString(), new Date(), 404),
+                    HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new DefaultError("Internal Server Error", e.toString(), new Date(), 500),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
 }

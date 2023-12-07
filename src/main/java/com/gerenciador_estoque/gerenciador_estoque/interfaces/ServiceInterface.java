@@ -9,7 +9,7 @@ public interface ServiceInterface<T, ID> {
     
     public Boolean save(@Valid T object) throws Exception;
     
-    public Boolean update(T object) throws Exception;
+    public Boolean update(@Valid T object) throws Exception;
 
     public Boolean update(@Valid T object,ID id)throws Exception;
 

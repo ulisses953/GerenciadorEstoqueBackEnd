@@ -14,6 +14,7 @@ import com.gerenciador_estoque.gerenciador_estoque.model.Product;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryCategory;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryProduct;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @Service
@@ -35,6 +36,7 @@ public class ServiceProducts implements ServiceInterface<Product, Long> {
         if (object == repositoryProduct.save(object)) {
             return true;
         }
+        
         return false;
 
     }
@@ -57,33 +59,62 @@ public class ServiceProducts implements ServiceInterface<Product, Long> {
     }
 
     @Override
-    public Boolean update(Product object) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public Boolean update(@Valid Product object) throws Exception {
+        return update(object, object.getId());
     }
 
     @Override
-    public Boolean update(@Valid Product object, Long id) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public Boolean update(@Valid Product object, Long id) throws Exception  {
+        if (findById(id).isEmpty()) {
+            throw new EntityNotFoundException("Product with ID" + id +" not found");
+        }
+        if (object == null){
+            throw new IllegalArgumentException("object is not null");
+        }
+
+        object.setId(id);
+
+        repositoryProduct.save(object);
+
+        return true;
+
     }
 
     @Override
     public Boolean delete(Long id) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        if (findById(id).isEmpty()) {
+            return false;
+        }
+
+        repositoryProduct.deleteById(id);
+
+        return true;
     }
 
     @Override
     public Optional<Product> findById(Long id) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        if(id < 0){
+            return Optional.empty();
+        }
+
+        return repositoryProduct.findById(id);
     }
 
     @Override
     public List<Product> findAll() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return repositoryProduct.findAll();
     }
+    
+    public List<Product> getProductsByCategoryId(Long id){
+        if (id < 0) {
+            throw new IllegalArgumentException("id cannot be negative");
+        }
+        if (repositoryCategory.findById(id).isEmpty()){
+            throw new EntityNotFoundException("id not found");
+        }
+
+        return repositoryProduct.getProductsByCategoryId(id);
+    }
+    
 
 }

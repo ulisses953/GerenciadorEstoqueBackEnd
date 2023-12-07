@@ -2,6 +2,7 @@ package com.gerenciador_estoque.gerenciador_estoque.interfaces;
 
 import org.springframework.http.ResponseEntity;
 
+
 public interface ControllerInterface<ID, T> {
     
     public ResponseEntity<?> save( T object);
