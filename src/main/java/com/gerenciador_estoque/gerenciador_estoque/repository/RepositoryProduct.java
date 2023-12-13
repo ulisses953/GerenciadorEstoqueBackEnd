@@ -14,4 +14,5 @@ public interface RepositoryProduct extends JpaRepository<Product, Long> {
 
     @Query(value = "select tp.* from tb_product tp inner join tb_category_product tcp on tcp.product_id = tp.id where tcp.category_id = :id",nativeQuery = true)
     public List<Product> getProductsByCategoryId(long id);
+
 } 

@@ -70,6 +70,4 @@ public class Category {
         return "Category [id=" + id + ", name=" + name + ", description=" + description + ", product=" + product + "]";
     }
 
-    
-
 }

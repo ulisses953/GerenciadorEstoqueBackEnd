@@ -2,7 +2,6 @@ package com.gerenciador_estoque.gerenciador_estoque.controller;
 
 import java.util.Date;
 
-import org.hibernate.jdbc.Expectations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +22,13 @@ import com.gerenciador_estoque.gerenciador_estoque.service.ServiceProducts;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 
-@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/products")
 public class ControllerProduct {
     @Autowired
     private ServiceProducts serviceProducts;
 
+    
     @CrossOrigin
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Product product) {
@@ -97,7 +96,6 @@ public class ControllerProduct {
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
     @GetMapping("/category/{id}")
     public ResponseEntity<?> getProductsByCategoryId(@PathVariable Long id) {
         try {
