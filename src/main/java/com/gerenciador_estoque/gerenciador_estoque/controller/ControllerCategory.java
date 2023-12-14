@@ -1,6 +1,7 @@
 package com.gerenciador_estoque.gerenciador_estoque.controller;
 
 import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,7 +53,7 @@ public class ControllerCategory {
     }
     @CrossOrigin
     @PutMapping("{id}")
-    public ResponseEntity<?> update(@RequestBody Category object, @PathVariable Long id) {
+    public ResponseEntity<?> update(@RequestBody Category object, @PathVariable UUID id) {
         try {
             serviceCategory.update(object, id);
             return new ResponseEntity<>(object, HttpStatus.OK);
@@ -69,7 +70,7 @@ public class ControllerCategory {
     }
     @CrossOrigin
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
         try {
             return new ResponseEntity<>(serviceCategory.delete(id),HttpStatus.OK);
         } catch (Exception e) {
@@ -79,7 +80,7 @@ public class ControllerCategory {
     }
     @CrossOrigin
     @GetMapping("{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id) {
+    public ResponseEntity<?> findById(@PathVariable UUID id) {
         try {
             return new ResponseEntity<>(serviceCategory.findById(id), HttpStatus.OK);
         } catch (Exception e) {

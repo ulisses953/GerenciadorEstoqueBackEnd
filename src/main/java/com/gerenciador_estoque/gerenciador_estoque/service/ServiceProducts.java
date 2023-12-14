@@ -3,41 +3,43 @@ package com.gerenciador_estoque.gerenciador_estoque.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.gerenciador_estoque.gerenciador_estoque.interfaces.ServiceInterface;
 import com.gerenciador_estoque.gerenciador_estoque.model.Category;
 import com.gerenciador_estoque.gerenciador_estoque.model.Product;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryCategory;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryProduct;
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.Valid;
 
 @Service
 @Validated
-public class ServiceProducts implements ServiceInterface<Product, Long> {
+public class ServiceProducts {
     @Autowired
     private RepositoryProduct repositoryProduct;
     @Autowired
     private RepositoryCategory repositoryCategory;
 
-    @Override
-    public Boolean save(@Valid Product object) throws Exception {
+    public Boolean save(Product object) throws Exception {
         if (object == null) {
-            throw new IllegalArgumentException("object is not null");
+            throw new IllegalArgumentException("object cannot be null");
+        }
+        
+
+        if (object.getCategories() == null) {
+            repositoryProduct.save(object);
+            return true;
         }
 
         object.setCategories(updateProductCategoriesFromDatabase(object));
 
-        if (object == repositoryProduct.save(object)) {
-            return true;
-        }
+        repositoryProduct.save(object);
         
-        return false;
+        return true;
 
     }
 
@@ -46,29 +48,26 @@ public class ServiceProducts implements ServiceInterface<Product, Long> {
         List<Category> newCategories = new ArrayList<Category>();
 
         for (Category category : object.getCategories()) {
-            Optional<Category> CategoryDatabese = repositoryCategory.findById(category.getId());
-            if (CategoryDatabese.isPresent()) {
-               category = CategoryDatabese.get();
+           if(category.getId() == null){
+                newCategories.add(category);
+            }else{
+                newCategories.add(repositoryCategory.findById(category.getId()).orElseThrow(() -> new EntityNotFoundException("id não encontrado" + category.getId())));
             }
-
-            newCategories.add(category);
         }
 
         return newCategories;
 
     }
 
-    @Override
-    public Boolean update(@Valid Product object) throws Exception {
+    public Boolean update(Product object) throws Exception {
         return update(object, object.getId());
     }
 
-    @Override
-    public Boolean update(@Valid Product object, Long id) throws Exception  {
+    public Boolean update(Product object, UUID id) throws Exception {
         if (findById(id).isEmpty()) {
-            throw new EntityNotFoundException("Product with ID" + id +" not found");
+            throw new EntityNotFoundException("Product with ID" + id + " not found");
         }
-        if (object == null){
+        if (object == null) {
             throw new IllegalArgumentException("object is not null");
         }
 
@@ -80,41 +79,28 @@ public class ServiceProducts implements ServiceInterface<Product, Long> {
 
     }
 
-    @Override
-    public Boolean delete(Long id) throws Exception {
-        if (findById(id).isEmpty()) {
-            return false;
-        }
-
+    public Boolean delete(UUID id) throws Exception {
         repositoryProduct.deleteById(id);
+        
 
         return true;
     }
 
-    @Override
-    public Optional<Product> findById(Long id) throws Exception {
-        if(id < 0){
-            return Optional.empty();
-        }
-
+    public Optional<Product> findById(UUID id) throws Exception {
         return repositoryProduct.findById(id);
     }
 
-    @Override
     public List<Product> findAll() throws Exception {
         return repositoryProduct.findAll();
     }
-    
-    public List<Product> getProductsByCategoryId(Long id){
-        if (id < 0) {
-            throw new IllegalArgumentException("id cannot be negative");
-        }
-        if (repositoryCategory.findById(id).isEmpty()){
+
+    public List<Product> getProductsByCategoryId(UUID id) {
+
+        if (repositoryCategory.findById(id).isEmpty()) {
             throw new EntityNotFoundException("id not found");
         }
 
         return repositoryProduct.getProductsByCategoryId(id);
     }
-    
 
 }

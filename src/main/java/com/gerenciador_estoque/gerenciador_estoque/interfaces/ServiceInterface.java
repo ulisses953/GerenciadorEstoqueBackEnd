@@ -18,4 +18,5 @@ public interface ServiceInterface<T, ID> {
     public Optional<T> findById(ID id)throws Exception;
 
     public List<T> findAll()throws Exception;
+
 }

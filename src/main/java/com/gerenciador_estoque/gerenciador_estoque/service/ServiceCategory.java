@@ -2,26 +2,25 @@ package com.gerenciador_estoque.gerenciador_estoque.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.gerenciador_estoque.gerenciador_estoque.interfaces.ServiceInterface;
 import com.gerenciador_estoque.gerenciador_estoque.model.Category;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryCategory;
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.Valid;
 
 @Service
 @Validated
-public class ServiceCategory implements ServiceInterface<Category, Long>{
+public class ServiceCategory {
     @Autowired
     private RepositoryCategory repositoryCategory;
 
     
-    public Boolean save(@Valid Category object) throws Exception {
+    public Boolean save( Category object) throws Exception {
         if (object == null) {
             throw new IllegalArgumentException("object is null");
         }
@@ -31,11 +30,11 @@ public class ServiceCategory implements ServiceInterface<Category, Long>{
         return true;
     }
 
-    public Boolean update(@Valid Category object) throws Exception {
+    public Boolean update(Category object) throws Exception {
         return update(object,object.getId());
     }
 
-    public Boolean update(@Valid Category object, Long id) throws Exception {
+    public Boolean update(Category object, UUID id) throws Exception {
         if (findById(id).isEmpty()) {
             throw new EntityNotFoundException("Product with ID" + id +" not found");
         }
@@ -50,10 +49,8 @@ public class ServiceCategory implements ServiceInterface<Category, Long>{
         return true;
     }
 
-    public Boolean delete(Long id) {
-        if (id < 0) {
-            return false;
-        }
+    public Boolean delete(UUID id) {
+ 
         if (findById(id).isEmpty()){
             return false;
         }
@@ -63,11 +60,7 @@ public class ServiceCategory implements ServiceInterface<Category, Long>{
         return true;
     }
 
-    public Optional<Category> findById(Long id)  {
-        if (id < 0 ) {
-            return Optional.empty();
-        }
-
+    public Optional<Category> findById(UUID id)  {
         return repositoryCategory.findById(id);
     }
 

@@ -2,6 +2,7 @@ package com.gerenciador_estoque.gerenciador_estoque.model;
 
 
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -11,8 +12,8 @@ import jakarta.validation.constraints.NotNull;
 @Table(name = "tb_product")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     @NotBlank
     private String name;
     private String description;
@@ -20,17 +21,22 @@ public class Product {
     @NotNull
     private Double saleValue;
     
-    @ManyToMany(mappedBy = "product")
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "tb_category_product",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     private List<Category> categories;
 
     @OneToMany(mappedBy = "product")
     private List<StockProducts> StockProducts;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -66,7 +72,7 @@ public class Product {
         this.categories = categories;
     }
 
-    public Product(Long id, String name, String description, Double saleValue, List<Category> categories,
+    public Product(UUID id, String name, String description, Double saleValue, List<Category> categories,
             List<com.gerenciador_estoque.gerenciador_estoque.model.StockProducts> stockProducts) {
         this.id = id;
         this.name = name;

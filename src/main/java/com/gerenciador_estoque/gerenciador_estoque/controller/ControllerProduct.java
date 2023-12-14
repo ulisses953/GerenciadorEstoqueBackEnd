@@ -1,6 +1,7 @@
 package com.gerenciador_estoque.gerenciador_estoque.controller;
 
 import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,7 +50,7 @@ public class ControllerProduct {
 
     @CrossOrigin
     @GetMapping("{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id) {
+    public ResponseEntity<?> findById(@PathVariable UUID id) {
         try {
             return new ResponseEntity<>(serviceProducts.findById(id), HttpStatus.OK);
         } catch (Exception e) {
@@ -71,7 +72,7 @@ public class ControllerProduct {
 
     @CrossOrigin
     @PutMapping("{id}")
-    public ResponseEntity<?> update(@RequestBody Product object, @PathVariable Long id) {
+    public ResponseEntity<?> update(@RequestBody Product object, @PathVariable UUID id) {
         try {
             return new ResponseEntity<>(serviceProducts.update(object, id), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
@@ -88,7 +89,7 @@ public class ControllerProduct {
 
     @CrossOrigin
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
         try {
             return new ResponseEntity<>(serviceProducts.delete(id), HttpStatus.OK);
         } catch (Exception e) {
@@ -97,7 +98,7 @@ public class ControllerProduct {
         }
     }
     @GetMapping("/category/{id}")
-    public ResponseEntity<?> getProductsByCategoryId(@PathVariable Long id) {
+    public ResponseEntity<?> getProductsByCategoryId(@PathVariable UUID id) {
         try {
             return new ResponseEntity<>(serviceProducts.getProductsByCategoryId(id), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
