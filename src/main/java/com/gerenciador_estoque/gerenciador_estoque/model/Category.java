@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_category")
@@ -11,13 +12,13 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    //@NotBlank(message = "the field name must be filled in correctly") 
+    @NotBlank(message = "the field name must be filled in correctly")
+    @Column(unique = true)
     private String name;
     private String description;
 
     //#region 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "categories")
-    
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},mappedBy = "categories")
     private List<Product> product;
 
     //#endregion

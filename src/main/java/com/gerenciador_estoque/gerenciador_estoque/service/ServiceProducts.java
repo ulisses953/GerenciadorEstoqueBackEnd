@@ -51,7 +51,7 @@ public class ServiceProducts {
            if(category.getId() == null){
                 newCategories.add(category);
             }else{
-                newCategories.add(repositoryCategory.findById(category.getId()).orElseThrow(() -> new EntityNotFoundException("id não encontrado" + category.getId())));
+                newCategories.add(repositoryCategory.findById(category.getId()).orElseThrow(() -> new EntityNotFoundException("id não encontrado : " + category.getId())));
             }
         }
 
@@ -79,11 +79,24 @@ public class ServiceProducts {
 
     }
 
-    public Boolean delete(UUID id) throws Exception {
-        repositoryProduct.deleteById(id);
+    public Product delete(UUID id) throws EntityNotFoundException,IllegalArgumentException {
+        if (id == null) {
+            throw new IllegalArgumentException("ID não pode ser nulo");
+        }
         
+        Product product = repositoryProduct.findById(id).orElse(null); 
+        
+        if (product == null) {
+            throw new EntityNotFoundException("Produto não encontrado com o ID: " + id);
+        }
+        
+        product.getCategories().clear();
 
-        return true;
+        repositoryProduct.save(product);
+
+        repositoryProduct.deleteById(product.getId());
+
+        return product;
     }
 
     public Optional<Product> findById(UUID id) throws Exception {

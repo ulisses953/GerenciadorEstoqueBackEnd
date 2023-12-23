@@ -12,6 +12,7 @@ import com.gerenciador_estoque.gerenciador_estoque.model.Category;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryCategory;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 
 @Service
 @Validated
@@ -20,7 +21,7 @@ public class ServiceCategory {
     private RepositoryCategory repositoryCategory;
 
     
-    public Boolean save( Category object) throws Exception {
+    public Boolean save(@Valid Category object) throws Exception {
         if (object == null) {
             throw new IllegalArgumentException("object is null");
         }
