@@ -28,7 +28,6 @@ public class ServiceProducts {
         if (object == null) {
             throw new IllegalArgumentException("object cannot be null");
         }
-        
 
         if (object.getCategories() == null) {
             repositoryProduct.save(object);
@@ -38,7 +37,7 @@ public class ServiceProducts {
         object.setCategories(updateProductCategoriesFromDatabase(object));
 
         repositoryProduct.save(object);
-        
+
         return true;
 
     }
@@ -48,10 +47,11 @@ public class ServiceProducts {
         List<Category> newCategories = new ArrayList<Category>();
 
         for (Category category : object.getCategories()) {
-           if(category.getId() == null){
+            if (category.getId() == null) {
                 newCategories.add(category);
-            }else{
-                newCategories.add(repositoryCategory.findById(category.getId()).orElseThrow(() -> new EntityNotFoundException("id não encontrado : " + category.getId())));
+            } else {
+                newCategories.add(repositoryCategory.findById(category.getId())
+                        .orElseThrow(() -> new EntityNotFoundException("id não encontrado : " + category.getId())));
             }
         }
 
@@ -84,11 +84,9 @@ public class ServiceProducts {
             throw new IllegalArgumentException("ID não pode ser nulo");
         }
         
-        Product product = repositoryProduct.findById(id).orElse(null); 
-        
-        if (product == null) {
-            throw new EntityNotFoundException("Produto não encontrado com o ID: " + id);
-        }
+        Product product = repositoryProduct.findById(id).orElseThrow(()->
+            new EntityNotFoundException("Produto não encontrado com o ID: " + id)
+        );
         
         product.getCategories().clear();
 

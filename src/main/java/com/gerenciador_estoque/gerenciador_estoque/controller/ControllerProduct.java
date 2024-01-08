@@ -92,7 +92,11 @@ public class ControllerProduct {
     public ResponseEntity<?> delete(@PathVariable UUID id) {
         try {
             return new ResponseEntity<>(serviceProducts.delete(id), HttpStatus.OK);
-        } catch (Exception e) {
+        }catch (EntityNotFoundException e){
+            return new ResponseEntity<>(new DefaultError("Produto não encontrado", e.getMessage(), new Date(), 404), HttpStatus.NOT_FOUND);
+        }catch (IllegalArgumentException e){
+            return new ResponseEntity<>(new DefaultError("Requisição inválida", e.getMessage(), new Date(), 400), HttpStatus.BAD_REQUEST);
+        }catch (Exception e) {
             return new ResponseEntity<>(new DefaultError("Internal Server Error", e.toString(), new Date(), 500),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }

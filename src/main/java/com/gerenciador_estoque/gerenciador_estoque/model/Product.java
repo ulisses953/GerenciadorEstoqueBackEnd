@@ -1,6 +1,5 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
-
 import java.util.List;
 import java.util.UUID;
 
@@ -20,17 +19,17 @@ public class Product {
     @Column(name = "sale_value")
     @NotNull
     private Double saleValue;
-    
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "tb_category_product",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
+    private Integer minimumQuantity;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "tb_category_product", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
 
     @OneToMany(mappedBy = "product")
     private List<StockProducts> StockProducts;
+
+    @OneToMany(mappedBy = "product")
+    private List<Image> imageList;
 
     public UUID getId() {
         return id;
@@ -72,6 +71,14 @@ public class Product {
         this.categories = categories;
     }
 
+    public Integer getMinimumQuantity() {
+        return minimumQuantity;
+    }
+
+    public void setMinimumQuantity(Integer minimumQuantity) {
+        this.minimumQuantity = minimumQuantity;
+    }
+
     public Product(UUID id, String name, String description, Double saleValue, List<Category> categories,
             List<com.gerenciador_estoque.gerenciador_estoque.model.StockProducts> stockProducts) {
         this.id = id;
@@ -93,7 +100,5 @@ public class Product {
 
     public Product() {
     }
-
-    
 
 }
