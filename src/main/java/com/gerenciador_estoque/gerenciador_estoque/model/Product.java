@@ -79,6 +79,17 @@ public class Product {
         this.minimumQuantity = minimumQuantity;
     }
 
+    
+
+    public Product(@NotBlank String name, String description, @NotNull Double saleValue, Integer minimumQuantity,
+            List<Category> categories) {
+        this.name = name;
+        this.description = description;
+        this.saleValue = saleValue;
+        this.minimumQuantity = minimumQuantity;
+        this.categories = categories;
+    }
+
     public Product(UUID id, String name, String description, Double saleValue, List<Category> categories,
             List<com.gerenciador_estoque.gerenciador_estoque.model.StockProducts> stockProducts) {
         this.id = id;

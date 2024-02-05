@@ -22,6 +22,8 @@ import com.gerenciador_estoque.gerenciador_estoque.service.ServiceCategory;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("api/categories")
@@ -96,6 +98,16 @@ public class ControllerCategory {
         } catch (Exception e) {
             return new ResponseEntity<>(new DefaultError("IllegalArgumentException", e.toString(), new Date(), 400),
                     HttpStatus.BAD_REQUEST);
+        }
+    }
+    @CrossOrigin
+    @GetMapping("graphics/amount")
+    public ResponseEntity<?> categoryAmounts() {
+        try {
+            return new ResponseEntity<>(serviceCategory.obterCategoryAmount(),HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new DefaultError("Internal Server Error", e.toString(), new Date(), 500),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     

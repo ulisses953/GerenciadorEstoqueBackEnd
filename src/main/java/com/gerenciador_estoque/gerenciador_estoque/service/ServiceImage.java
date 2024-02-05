@@ -25,8 +25,6 @@ public class ServiceImage {
             throw new EntityNotFoundException("id not found");
         }
 
-        
-        
         return null;
     }
 }

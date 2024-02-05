@@ -1,6 +1,7 @@
 package com.gerenciador_estoque.gerenciador_estoque.model;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.gerenciador_estoque.gerenciador_estoque.enums.StockStatus;
 
@@ -11,8 +12,8 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "tb_stock")
 public class Stock {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     @NotBlank
     private String name;
     private String location;
@@ -28,11 +29,11 @@ public class Stock {
     @OneToMany(mappedBy = "stock")
     private List<StockProducts> stockProducts;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

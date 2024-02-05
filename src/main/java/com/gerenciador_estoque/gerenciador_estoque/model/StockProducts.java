@@ -23,4 +23,51 @@ public class StockProducts {
     @ManyToOne()
     private Stock stock;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
+
+    public StockProducts(Long id, @NotNull int quantity, Product product, Stock stock) {
+        this.id = id;
+        this.quantity = quantity;
+        this.product = product;
+        this.stock = stock;
+    }
+
+    public StockProducts() {
+    }
+
+    public StockProducts(@NotNull int quantity, Product product, Stock stock) {
+        this.quantity = quantity;
+        this.product = product;
+        this.stock = stock;
+    }
 }

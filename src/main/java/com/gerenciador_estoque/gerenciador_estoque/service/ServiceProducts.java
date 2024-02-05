@@ -24,12 +24,21 @@ public class ServiceProducts {
     @Autowired
     private RepositoryCategory repositoryCategory;
 
-    public Boolean save(Product object) throws Exception {
+    public Boolean save(Product object) throws IllegalArgumentException {
         if (object == null) {
             throw new IllegalArgumentException("object cannot be null");
         }
+        if (object.getId() != null) {
+            if (repositoryProduct.findById(object.getId()).isPresent()) {
+                throw new IllegalArgumentException("id entered already exists");
+            }
+        }
+        if (object.getCategories() == null ) {
+            repositoryProduct.save(object);
+            return true;
+        }
 
-        if (object.getCategories() == null) {
+        if (object.getCategories().size() == 0 ) {
             repositoryProduct.save(object);
             return true;
         }
@@ -41,9 +50,13 @@ public class ServiceProducts {
         return true;
 
     }
-
-    private List<Category> updateProductCategoriesFromDatabase(Product object) {
-
+    /**
+     * Essa funcao tem como objetivo verifiar se o id informado esta no banco de dados e pegar o valor
+     * @param object
+     * @return
+     */
+    public List<Category> updateProductCategoriesFromDatabase(Product object) {
+        
         List<Category> newCategories = new ArrayList<Category>();
 
         for (Category category : object.getCategories()) {
