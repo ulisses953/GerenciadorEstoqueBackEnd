@@ -12,7 +12,9 @@ import org.springframework.validation.annotation.Validated;
 import com.gerenciador_estoque.gerenciador_estoque.dto.DtoCategoryAmount;
 import com.gerenciador_estoque.gerenciador_estoque.interfaces.CategoryAmountProjection;
 import com.gerenciador_estoque.gerenciador_estoque.model.Category;
+import com.gerenciador_estoque.gerenciador_estoque.model.Product;
 import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryCategory;
+import com.gerenciador_estoque.gerenciador_estoque.repository.RepositoryProduct;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -22,6 +24,8 @@ import jakarta.validation.Valid;
 public class ServiceCategory {
     @Autowired
     private RepositoryCategory repositoryCategory;
+    @Autowired
+    private RepositoryProduct repositoryProduct;
 
     public Category save(@Valid Category object) throws IllegalArgumentException {
         if (object == null) {
@@ -61,6 +65,12 @@ public class ServiceCategory {
 
         if (category.isEmpty()) {
             return false;
+        }
+
+        List<Product> productsByCategory =  repositoryProduct.getProductsByCategoryId(category.get().getId());
+        
+        for (Product product : productsByCategory) {
+            product.getCategories().clear();
         }
 
         repositoryCategory.deleteById(id);

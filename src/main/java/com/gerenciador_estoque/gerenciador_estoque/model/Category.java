@@ -63,6 +63,10 @@ public class Category {
         this.name = name;
         this.description = description;
     }
+
+    public Category(UUID id){
+        this.id = id;
+    }
     
     @Override
     public String toString() {

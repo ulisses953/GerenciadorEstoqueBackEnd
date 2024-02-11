@@ -15,4 +15,6 @@ public interface RepositoryCategory extends JpaRepository<Category, UUID> {
 
     @Query(value = "select tc.name, count(tp.id) as amount from tb_category tc inner join tb_category_product tcp ON tcp.category_id = tc.id inner join tb_product tp on tp.id = tcp.product_id GROUP BY tc.name", nativeQuery = true)
     public List<CategoryAmountProjection> categoryAmount();
+
+    
 }

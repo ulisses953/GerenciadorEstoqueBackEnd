@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gerenciador_estoque.gerenciador_estoque.error.DefaultError;
 import com.gerenciador_estoque.gerenciador_estoque.model.Product;
@@ -116,4 +118,21 @@ public class ControllerProduct {
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/{id}/image")
+    public ResponseEntity<?> postMethodName(@RequestParam MultipartFile file, @PathVariable UUID id) {
+        try {
+
+
+            
+            return new ResponseEntity<>("file added successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new DefaultError("Internal Server Error", e.toString(), new Date(), 500),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
+
+        
+    }
+    
 }
