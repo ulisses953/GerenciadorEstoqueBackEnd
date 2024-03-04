@@ -45,4 +45,3 @@ O arquivo fica localizado no ``target\site\jacoco\index.html``
 ## User
 
 - [@ulisses953](https://github.com/ulisses953)
-# GerenciadorDeEstoqueFrontEnd
